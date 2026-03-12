@@ -423,7 +423,6 @@ const Configurator = () => {
           <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
             Estimated price:
           </p>
-          {/* TODO: dynamic */}
           <p className="mt-[4px]">
             <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
               A{formatPrice('dollar', totalPrice)}
@@ -611,7 +610,6 @@ const Configurator = () => {
         <p className="text-[15px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
           Estimated Price
         </p>
-        {/* TODO: dynamic */}
         <p className="mt-[4px]">
           <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
             A{formatPrice('dollar', totalPrice)}
