@@ -601,7 +601,10 @@ const Configurator = () => {
             </button>
           </div>
         )}
-        <div className="h-[160px]"></div>
+
+        {isContinue === true && isSubmitted === false && <div className="h-[80px]"></div>}
+
+        {isSubmitted && <div className="h-[160px]"></div>}
       </div>
 
       <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]">
