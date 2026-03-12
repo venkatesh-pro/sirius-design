@@ -1,7 +1,7 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const Slider = () => {
@@ -159,6 +159,31 @@ const Configurator = () => {
     setIsSubmitted(true);
     console.log(data);
   };
+
+  const calculateTotalPrice = data => {
+    let total = 0;
+
+    // active size
+    const activeSize = data.sizes.find(s => s.isActive);
+    if (activeSize) total += activeSize.pricing.price;
+
+    // active interior finish
+    const activeInterior = data.interiorFinishes.find(i => i.isActive);
+    if (activeInterior) total += activeInterior.pricing.price;
+
+    // due to optional upgrades is like checkbox, we are doing forEach
+    data.optionalUpgrades.forEach(upgrade => {
+      if (upgrade.isActive) {
+        total += upgrade.pricing.price;
+      }
+    });
+
+    return total;
+  };
+
+  const totalPrice = useMemo(() => {
+    return calculateTotalPrice(configuratorData);
+  }, [configuratorData]);
 
   return (
     <>
@@ -401,7 +426,7 @@ const Configurator = () => {
           {/* TODO: dynamic */}
           <p className="mt-[4px]">
             <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
-              A$64,200
+              A{formatPrice('dollar', totalPrice)}
             </span>
             <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
               + GST
@@ -579,14 +604,14 @@ const Configurator = () => {
         <div className="h-[160px]"></div>
       </div>
 
-      <div className='bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]'>
+      <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]">
         <p className="text-[15px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
           Estimated Price
         </p>
         {/* TODO: dynamic */}
         <p className="mt-[4px]">
           <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
-            A$64,200
+            A{formatPrice('dollar', totalPrice)}
           </span>
           <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
             + GST
