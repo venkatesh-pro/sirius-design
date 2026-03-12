@@ -442,15 +442,16 @@ const Configurator = () => {
             Final delivery cost and site preparation may vary depending on location and installation
             requirements.
           </p>
-
-          <button
-            onClick={() => {
-              setIsContinue(true);
-            }}
-            className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
-          >
-            Continue
-          </button>
+          {isContinue === false && (
+            <button
+              onClick={() => {
+                setIsContinue(true);
+              }}
+              className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
+            >
+              Continue
+            </button>
+          )}
         </div>
 
         <div className="h-[80px]"></div>
