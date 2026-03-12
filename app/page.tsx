@@ -1,8 +1,8 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
-import React, { useMemo, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useMemo, useState } from 'react';
+import { FieldErrors, FieldValues, useForm, UseFormRegister } from 'react-hook-form';
 
 const Slider = () => {
   return <img src={'/banner1.jpg'} className="h-full w-full"></img>;
@@ -12,7 +12,23 @@ const formatPrice = (currency: string, value: number) => {
   return `${currency === 'dollar' && '$'}${new Intl.NumberFormat().format(value)}`;
 };
 
-const InputField = ({ type, placeholder, register, label, isRequired, errors, pattern }) => {
+const InputField = ({
+  type,
+  placeholder,
+  register,
+  label,
+  isRequired,
+  errors,
+  pattern,
+}: {
+  type: 'text' | 'number' | 'email';
+  placeholder: string;
+  label: string;
+  pattern?: string;
+  errors?: FieldErrors<FieldValues>;
+  register: UseFormRegister<FieldValues>;
+  isRequired?: boolean;
+}) => {
   return (
     <input
       className={`h-[56px] w-full py-[20px] px-[24px] rounded-[100px] border-[1px] border-[#C4C4C4] focus:outline-[1px] focus:outline-[#171A20] focus:border-[#171A20] placeholder:text-[#5C5E62] text-[17px] font-[400] placeholder:text-[17px] placeholder:font-[400] tracking-[1%] leading-[100%] ${
@@ -33,11 +49,53 @@ const InputField = ({ type, placeholder, register, label, isRequired, errors, pa
     />
   );
 };
+
+type Pricing = {
+  price: number;
+  currency: string;
+};
+
+type Size = {
+  name: string;
+  value: number;
+  unit: string;
+  pricing: Pricing;
+  isActive: boolean;
+};
+
+type ExteriorFinish = {
+  color: string;
+  name: string;
+  isActive: boolean;
+};
+
+type InteriorFinish = {
+  name: string;
+  description: string;
+  includes: string[];
+  pricing: Pricing;
+  isActive: boolean;
+};
+
+type OptionalUpgrade = {
+  name: string;
+  description: string;
+  pricing: Pricing;
+  isActive: boolean;
+};
+
+type ConfiguratorData = {
+  sizes: Size[];
+  exteriorFinishes: ExteriorFinish[];
+  interiorFinishes: InteriorFinish[];
+  optionalUpgrades: OptionalUpgrade[];
+};
+
 const Configurator = () => {
   const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [configuratorData, setConfiguratorData] = useState({
+  const [configuratorData, setConfiguratorData] = useState<ConfiguratorData>({
     sizes: [
       {
         name: '4.0m x 3.2m',
@@ -155,12 +213,12 @@ const Configurator = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = (data: unknown) => {
     setIsSubmitted(true);
     console.log(data);
   };
 
-  const calculateTotalPrice = data => {
+  const calculateTotalPrice = (data: ConfiguratorData) => {
     let total = 0;
 
     // active size
@@ -548,7 +606,7 @@ const Configurator = () => {
                   label={'emailAddress'}
                   placeholder={'Email Address'}
                   register={register}
-                  type={'text'}
+                  type={'email'}
                   errors={errors}
                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                 />
