@@ -135,6 +135,7 @@ const Configurator = () => {
         </div>
       </div>
 
+      {/* TODO: fix the box text max width */}
       {/* size */}
       <div className="mt-[60px]">
         <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
@@ -322,7 +323,7 @@ const Configurator = () => {
 const page = () => {
   return (
     <div className="flex justify-between">
-      <div className="h-[100dvh] min-w-[1248px] wrapper">
+      <div className="h-[100dvh] sticky top-0 min-w-[1248px] wrapper">
         <Navbar />
         <div className="h-[calc(100%-56px)] w-full bg-blue-400 ">
           <Slider />
