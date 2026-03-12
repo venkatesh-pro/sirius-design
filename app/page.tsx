@@ -12,7 +12,7 @@ const formatPrice = (currency: string, value: number) => {
   return `${currency === 'dollar' && '$'}${new Intl.NumberFormat().format(value)}`;
 };
 
-const InputField = ({ type, placeholder, register, label, isRequired, errors }) => {
+const InputField = ({ type, placeholder, register, label, isRequired, errors, pattern }) => {
   return (
     <input
       className={`h-[56px] w-full py-[20px] px-[24px] rounded-[100px] border-[1px] border-[#C4C4C4] focus:outline-[1px] focus:outline-[#171A20] focus:border-[#171A20] placeholder:text-[#5C5E62] text-[17px] font-[400] placeholder:text-[17px] placeholder:font-[400] tracking-[1%] leading-[100%] ${
@@ -23,12 +23,19 @@ const InputField = ({ type, placeholder, register, label, isRequired, errors }) 
       placeholder={placeholder}
       {...register(label, {
         required: isRequired ? 'Required' : false,
+        pattern: pattern
+          ? {
+              value: new RegExp(pattern),
+              message: 'Invalid format',
+            }
+          : undefined,
       })}
     />
   );
 };
 const Configurator = () => {
   const [isContinue, setIsContinue] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const data = {
     sizes: [
@@ -146,7 +153,10 @@ const Configurator = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    setIsSubmitted(true);
+    console.log(data);
+  };
 
   return (
     <div className="mx-[48px]">
@@ -260,9 +270,12 @@ const Configurator = () => {
                       Includes:
                     </p>
                     <ul className="">
-                      {interiorFinish.includes.map(include => {
+                      {interiorFinish.includes.map((include, includeIndex) => {
                         return (
-                          <li className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[100%] mt-[6px]">
+                          <li
+                            key={includeIndex}
+                            className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[100%] mt-[6px]"
+                          >
                             {include}
                           </li>
                         );
@@ -446,6 +459,7 @@ const Configurator = () => {
                 register={register}
                 type={'text'}
                 errors={errors}
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
               />
               {errors.emailAddress && (
                 <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
@@ -485,6 +499,18 @@ const Configurator = () => {
           </button>
         </div>
       )}
+
+      {isSubmitted && (
+        <div>
+          <p className="mt-[32px] text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%]">
+            Your proposal request has been submitted.
+          </p>
+          <button className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+            Explore Sirius Shell
+          </button>
+        </div>
+      )}
+      <div className="h-[160px]"></div>
     </div>
   );
 };
@@ -499,7 +525,6 @@ const page = () => {
       </div>
       <div className="mt-[140px]">
         <Configurator />
-        <div className="h-[500px] "></div>
       </div>
     </div>
   );
