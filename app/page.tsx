@@ -317,7 +317,10 @@ const Configurator = () => {
           </h1>
           <div className="mt-[16px]">
             <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
-              Black
+              {
+                configuratorData.exteriorFinishes.find(exteriorFinish => exteriorFinish.isActive)
+                  ?.name
+              }
             </p>
             <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[5px]">
               Included
