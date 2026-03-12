@@ -34,10 +34,10 @@ const InputField = ({ type, placeholder, register, label, isRequired, errors, pa
   );
 };
 const Configurator = () => {
-  const [isContinue, setIsContinue] = useState(true);
+  const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const data = {
+  const [configuratorData, setConfiguratorData] = useState({
     sizes: [
       {
         name: '4.0m x 3.2m',
@@ -98,6 +98,7 @@ const Configurator = () => {
           price: 42000,
           currency: 'dollar',
         },
+        isActive: true,
       },
       {
         name: 'Standard Interior',
@@ -113,6 +114,7 @@ const Configurator = () => {
           price: 48000,
           currency: 'dollar',
         },
+        isActive: false,
       },
     ],
 
@@ -133,7 +135,7 @@ const Configurator = () => {
           price: 1400,
           currency: 'dollar',
         },
-        isActive: true,
+        isActive: false,
       },
       {
         name: 'Brand Facade Panel',
@@ -142,10 +144,10 @@ const Configurator = () => {
           price: 2200,
           currency: 'dollar',
         },
-        isActive: true,
+        isActive: false,
       },
     ],
-  };
+  });
 
   const {
     register,
@@ -160,6 +162,7 @@ const Configurator = () => {
 
   return (
     <div className="mx-[48px]">
+      {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
       <div>
         <h1 className="text-[40px] font-[400] leading-[100%] tracking-[0%] text-[#171A20]">
           Sirius Shell
@@ -186,11 +189,22 @@ const Configurator = () => {
           All models are delivered as open floor space ready for custom fit-out.
         </p>
         <div className="">
-          {data.sizes.map((size, sizeIndex) => {
+          {configuratorData.sizes.map((size, sizeIndex) => {
             return (
               <div
                 key={sizeIndex}
-                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]"
+                className={`cursor-pointer py-[22px]  px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
+                  size.isActive && '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
+                }`}
+                onClick={() => {
+                  const updatedData = {
+                    ...configuratorData,
+                    sizes: configuratorData.sizes.map(s =>
+                      s.name === size.name ? { ...s, isActive: true } : { ...s, isActive: false }
+                    ),
+                  };
+                  setConfiguratorData(updatedData);
+                }}
               >
                 <div>
                   <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
@@ -226,15 +240,38 @@ const Configurator = () => {
           </p>
         </div>
         <div className="mt-[16px] flex gap-[17px] ">
-          {data.exteriorFinishes.map((exteriorFinish, exteriorFinishIndex) => {
+          {configuratorData.exteriorFinishes.map((exteriorFinish, exteriorFinishIndex) => {
             return (
               <div
                 key={exteriorFinishIndex}
-                className={`w-[35px] h-[35px] rounded-full `}
+                className={` flex items-center justify-center p-[5px] border-2 border-transparent cursor-pointer ${
+                  exteriorFinish.isActive ? 'border-2 rounded-full border-[#171A20]' : ''
+                }`}
                 style={{
-                  background: exteriorFinish.color,
+                  border: `${
+                    exteriorFinish.isActive ? '2px solid #171A20' : '2px solid transparent'
+                  }`,
                 }}
-              ></div>
+                onClick={() => {
+                  const updatedData = {
+                    ...configuratorData,
+                    exteriorFinishes: configuratorData.exteriorFinishes.map(s =>
+                      s.name === exteriorFinish.name
+                        ? { ...s, isActive: true }
+                        : { ...s, isActive: false }
+                    ),
+                  };
+                  setConfiguratorData(updatedData);
+                }}
+              >
+                <div
+                  key={exteriorFinishIndex}
+                  className={`w-[35px] h-[35px] rounded-full `}
+                  style={{
+                    background: exteriorFinish.color,
+                  }}
+                ></div>
+              </div>
             );
           })}
         </div>
@@ -251,11 +288,25 @@ const Configurator = () => {
         </p>
 
         <div>
-          {data.interiorFinishes.map((interiorFinish, interiorFinishIndex) => {
+          {configuratorData.interiorFinishes.map((interiorFinish, interiorFinishIndex) => {
             return (
               <div
                 key={interiorFinishIndex}
-                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]"
+                className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]  ${
+                  interiorFinish.isActive &&
+                  '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
+                }`}
+                onClick={() => {
+                  const updatedData = {
+                    ...configuratorData,
+                    interiorFinishes: configuratorData.interiorFinishes.map(s =>
+                      s.name === interiorFinish.name
+                        ? { ...s, isActive: true }
+                        : { ...s, isActive: false }
+                    ),
+                  };
+                  setConfiguratorData(updatedData);
+                }}
               >
                 <div>
                   <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
@@ -302,11 +353,25 @@ const Configurator = () => {
         </h1>
 
         <div>
-          {data.optionalUpgrades.map((optionalUpgrade, optionalUpgradeIndex) => {
+          {configuratorData.optionalUpgrades.map((optionalUpgrade, optionalUpgradeIndex) => {
             return (
               <div
+                onClick={() => {
+                  const updatedData = {
+                    ...configuratorData,
+                    optionalUpgrades: configuratorData.optionalUpgrades.map(s =>
+                      s.name === optionalUpgrade.name
+                        ? { ...s, isActive: true }
+                        : { ...s, isActive: false }
+                    ),
+                  };
+                  setConfiguratorData(updatedData);
+                }}
                 key={optionalUpgradeIndex}
-                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]"
+                className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
+                  optionalUpgrade.isActive &&
+                  '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
+                }`}
               >
                 <div>
                   <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
