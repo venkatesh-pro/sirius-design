@@ -54,6 +54,69 @@ const Configurator = () => {
         isActive: false,
       },
     ],
+
+    interiorFinishes: [
+      {
+        name: 'Base Structure',
+        description: 'Ideal for tenant or developer fit-out',
+        includes: [
+          'Insulated walls and ceiling',
+          'Internal wall and ceiling panels',
+          'Electrical rough-in',
+          'Finished exterior',
+          'Structural flooring ready for client flooring install',
+        ],
+        pricing: {
+          price: 42000,
+          currency: 'dollar',
+        },
+      },
+      {
+        name: 'Standard Interior',
+        description: 'Ready-to-use commercial space',
+        includes: [
+          'Finished commercial flooring',
+          'Internal wall and ceiling panels',
+          'Electrical installation (lighting + power outlets)',
+          'Emergency lighting and exit signage',
+          'Insulated walls and ceiling',
+        ],
+        pricing: {
+          price: 48000,
+          currency: 'dollar',
+        },
+      },
+    ],
+
+    optionalUpgrades: [
+      {
+        name: 'Double Glazed Glass',
+        description: 'Improved thermal and acoustic performance',
+        pricing: {
+          price: 3950,
+          currency: 'dollar',
+        },
+        isActive: true,
+      },
+      {
+        name: 'Step Deck',
+        description: 'Integrated entry platform for raised floor system',
+        pricing: {
+          price: 1400,
+          currency: 'dollar',
+        },
+        isActive: true,
+      },
+      {
+        name: 'Brand Facade Panel',
+        description: 'Prepared panel area for tenant signage or branding',
+        pricing: {
+          price: 2200,
+          currency: 'dollar',
+        },
+        isActive: true,
+      },
+    ],
   };
   return (
     <div className="mx-[48px]">
@@ -86,7 +149,7 @@ const Configurator = () => {
             return (
               <div
                 key={sizeIndex}
-                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px]"
+                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]"
               >
                 <div>
                   <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
@@ -121,12 +184,12 @@ const Configurator = () => {
             Included
           </p>
         </div>
-        <div className="mt-[16px] flex rounded-full ">
+        <div className="mt-[16px] flex gap-[17px] ">
           {data.exteriorFinishes.map((exteriorFinish, exteriorFinishIndex) => {
             return (
               <div
                 key={exteriorFinishIndex}
-                className={`w-[35px] h-[35px]`}
+                className={`w-[35px] h-[35px] rounded-full `}
                 style={{
                   background: exteriorFinish.color,
                 }}
@@ -135,6 +198,124 @@ const Configurator = () => {
           })}
         </div>
       </div>
+
+      {/* interior finish */}
+      <div className="mt-[60px]">
+        <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+          <span className="text-[#171A20]">Interior finish.</span>{' '}
+          <span className="text-[#808080]">How ready should the interior be?</span>
+        </h1>
+        <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
+          All models include open interior with lighting and power ready for use.
+        </p>
+
+        <div>
+          {data.interiorFinishes.map((interiorFinish, interiorFinishIndex) => {
+            return (
+              <div
+                key={interiorFinishIndex}
+                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]"
+              >
+                <div>
+                  <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                    {interiorFinish.name}
+                  </p>
+                  <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                    {interiorFinish.description}
+                  </p>
+
+                  <div>
+                    <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[100%] mt-[16px]">
+                      Includes:
+                    </p>
+                    <ul className="">
+                      {interiorFinish.includes.map(include => {
+                        return (
+                          <li className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[100%] mt-[6px]">
+                            {include}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                    {formatPrice(interiorFinish.pricing.currency, interiorFinish.pricing.price)}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* optional upgrades */}
+      <div className="mt-[60px]">
+        <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+          <span className="text-[#171A20]">Optional upgrades.</span>{' '}
+          <span className="text-[#808080]">Select the options that work for you.</span>
+        </h1>
+
+        <div>
+          {data.optionalUpgrades.map((optionalUpgrade, optionalUpgradeIndex) => {
+            return (
+              <div
+                key={optionalUpgradeIndex}
+                className="py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]"
+              >
+                <div>
+                  <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                    {optionalUpgrade.name}
+                  </p>
+                  <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                    {optionalUpgrade.description}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                    {formatPrice(optionalUpgrade.pricing.currency, optionalUpgrade.pricing.price)}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* optional upgrades */}
+      <div className="mt-[60px]">
+        <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+          Estimated price:
+        </p>
+        {/* TODO: dynamic */}
+        <p className="mt-[4px]">
+          <span className="text-[#171A20] text-[21px] font-[400] tracking-[1.5%] leading-[100%]">
+            A$64,200
+          </span>
+          <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+            + GST
+          </span>
+        </p>
+
+        <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[20px]">
+          Estimated lead time:
+        </p>
+        <p className="mt-[4px] text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+          3-6 weeks depending on production schedule.
+        </p>
+        <p className="mt-[20px] text-[#5C5E62] text-[12px] font-[400] tracking-[1.5%] leading-[100%]">
+          Final delivery cost and site preparation may vary depending on location and installation
+          requirements.
+        </p>
+
+        <button className="mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]">
+          Continue
+        </button>
+      </div>
+
+      <div className="h-[80px]"></div>
+      {/*  */}
     </div>
   );
 };
