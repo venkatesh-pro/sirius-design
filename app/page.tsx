@@ -1,12 +1,13 @@
 'use client';
 
 import Navbar from '@/components/Navbar';
+import Slider from '@/components/Slider/Slider';
 import { useMemo, useState } from 'react';
 import { FieldErrors, FieldValues, useForm, UseFormRegister } from 'react-hook-form';
 
-const Slider = () => {
-  return <img src={'/banner1.jpg'} className="h-full w-full"></img>;
-};
+// const Slider = ({ sliderImages, setSliderImages }) => {
+//   return <img src={'/banner1.jpg'} className="h-full w-full"></img>;
+// };
 
 const formatPrice = (currency: string, value: number) => {
   return `${currency === 'dollar' && '$'}${new Intl.NumberFormat().format(value)}`;
@@ -91,121 +92,9 @@ type ConfiguratorData = {
   optionalUpgrades: OptionalUpgrade[];
 };
 
-const Configurator = () => {
+const Configurator = ({ configuratorData, setConfiguratorData }) => {
   const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const [configuratorData, setConfiguratorData] = useState<ConfiguratorData>({
-    sizes: [
-      {
-        name: '4.0m x 3.2m',
-        value: 12.8,
-        unit: 'sqm',
-        pricing: {
-          price: 32000,
-          currency: 'dollar',
-        },
-        isActive: true,
-      },
-      {
-        name: '6.0m x 3.2m',
-        value: 19.2,
-        unit: 'sqm',
-        pricing: {
-          price: 42000,
-          currency: 'dollar',
-        },
-        isActive: false,
-      },
-    ],
-    exteriorFinishes: [
-      {
-        color: '#000000',
-        name: 'Black',
-        isActive: true,
-      },
-      {
-        color: '#E6E6E6',
-        name: 'Mercury',
-        isActive: false,
-      },
-      {
-        color: '#CDCCC2',
-        name: 'Pastel Grey',
-        isActive: false,
-      },
-      {
-        color: '#505051',
-        name: 'Vampire Grey',
-        isActive: false,
-      },
-    ],
-
-    interiorFinishes: [
-      {
-        name: 'Base Structure',
-        description: 'Ideal for tenant or developer fit-out',
-        includes: [
-          'Insulated walls and ceiling',
-          'Internal wall and ceiling panels',
-          'Electrical rough-in',
-          'Finished exterior',
-          'Structural flooring ready for client flooring install',
-        ],
-        pricing: {
-          price: 42000,
-          currency: 'dollar',
-        },
-        isActive: true,
-      },
-      {
-        name: 'Standard Interior',
-        description: 'Ready-to-use commercial space',
-        includes: [
-          'Finished commercial flooring',
-          'Internal wall and ceiling panels',
-          'Electrical installation (lighting + power outlets)',
-          'Emergency lighting and exit signage',
-          'Insulated walls and ceiling',
-        ],
-        pricing: {
-          price: 48000,
-          currency: 'dollar',
-        },
-        isActive: false,
-      },
-    ],
-
-    optionalUpgrades: [
-      {
-        name: 'Double Glazed Glass',
-        description: 'Improved thermal and acoustic performance',
-        pricing: {
-          price: 3950,
-          currency: 'dollar',
-        },
-        isActive: true,
-      },
-      {
-        name: 'Step Deck',
-        description: 'Integrated entry platform for raised floor system',
-        pricing: {
-          price: 1400,
-          currency: 'dollar',
-        },
-        isActive: false,
-      },
-      {
-        name: 'Brand Facade Panel',
-        description: 'Prepared panel area for tenant signage or branding',
-        pricing: {
-          price: 2200,
-          currency: 'dollar',
-        },
-        isActive: false,
-      },
-    ],
-  });
 
   const {
     register,
@@ -689,16 +578,137 @@ const Configurator = () => {
   );
 };
 const page = () => {
+  const [sliderImages, setSliderImages] = useState([
+    '/configuratorImages/BLACK/B1.jpg',
+    '/ConfiguratorImages/BLACK/B2.jpg',
+    '/ConfiguratorImages/BLACK/B3.jpg',
+  ]);
+
+  const [configuratorData, setConfiguratorData] = useState<ConfiguratorData>({
+    sizes: [
+      {
+        name: '4.0m x 3.2m',
+        value: 12.8,
+        unit: 'sqm',
+        pricing: {
+          price: 32000,
+          currency: 'dollar',
+        },
+        isActive: true,
+      },
+      {
+        name: '6.0m x 3.2m',
+        value: 19.2,
+        unit: 'sqm',
+        pricing: {
+          price: 42000,
+          currency: 'dollar',
+        },
+        isActive: false,
+      },
+    ],
+    exteriorFinishes: [
+      {
+        color: '#000000',
+        name: 'Black',
+        isActive: true,
+      },
+      {
+        color: '#E6E6E6',
+        name: 'Mercury',
+        isActive: false,
+      },
+      {
+        color: '#CDCCC2',
+        name: 'Pastel Grey',
+        isActive: false,
+      },
+      {
+        color: '#505051',
+        name: 'Vampire Grey',
+        isActive: false,
+      },
+    ],
+
+    interiorFinishes: [
+      {
+        name: 'Base Structure',
+        description: 'Ideal for tenant or developer fit-out',
+        includes: [
+          'Insulated walls and ceiling',
+          'Internal wall and ceiling panels',
+          'Electrical rough-in',
+          'Finished exterior',
+          'Structural flooring ready for client flooring install',
+        ],
+        pricing: {
+          price: 42000,
+          currency: 'dollar',
+        },
+        isActive: true,
+      },
+      {
+        name: 'Standard Interior',
+        description: 'Ready-to-use commercial space',
+        includes: [
+          'Finished commercial flooring',
+          'Internal wall and ceiling panels',
+          'Electrical installation (lighting + power outlets)',
+          'Emergency lighting and exit signage',
+          'Insulated walls and ceiling',
+        ],
+        pricing: {
+          price: 48000,
+          currency: 'dollar',
+        },
+        isActive: false,
+      },
+    ],
+
+    optionalUpgrades: [
+      {
+        name: 'Double Glazed Glass',
+        description: 'Improved thermal and acoustic performance',
+        pricing: {
+          price: 3950,
+          currency: 'dollar',
+        },
+        isActive: true,
+      },
+      {
+        name: 'Step Deck',
+        description: 'Integrated entry platform for raised floor system',
+        pricing: {
+          price: 1400,
+          currency: 'dollar',
+        },
+        isActive: false,
+      },
+      {
+        name: 'Brand Facade Panel',
+        description: 'Prepared panel area for tenant signage or branding',
+        pricing: {
+          price: 2200,
+          currency: 'dollar',
+        },
+        isActive: false,
+      },
+    ],
+  });
+
   return (
     <div className="flex justify-between">
       <div className="h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
         <Navbar />
         <div className="h-[calc(100%-56px)] w-full bg-blue-400 ">
-          <Slider />
+          <Slider sliderImages={sliderImages} />
         </div>
       </div>
       <div className="mt-[140px] w-[30vw] ">
-        <Configurator />
+        <Configurator
+          configuratorData={configuratorData}
+          setConfiguratorData={setConfiguratorData}
+        />
       </div>
     </div>
   );
