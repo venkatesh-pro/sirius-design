@@ -92,7 +92,12 @@ type ConfiguratorData = {
   optionalUpgrades: OptionalUpgrade[];
 };
 
-const Configurator = ({ configuratorData, setConfiguratorData }) => {
+type ConfiguratorProps = {
+  configuratorData: ConfiguratorData;
+  setConfiguratorData: React.Dispatch<React.SetStateAction<ConfiguratorData>>;
+};
+
+const Configurator = ({ configuratorData, setConfiguratorData }: ConfiguratorProps) => {
   const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -578,12 +583,7 @@ const Configurator = ({ configuratorData, setConfiguratorData }) => {
   );
 };
 const page = () => {
-  const [sliderImages, setSliderImages] = useState([
-    // '/configuratorImages/BLACK/B1.jpg',
-    // '/ConfiguratorImages/BLACK/B2.jpg',
-    // '/ConfiguratorImages/BLACK/B3.jpg',
-    // '/ConfiguratorImages/BLACK/B4.jpg', // b3 and b4 for the deck
-  ]);
+  const [sliderImages, setSliderImages] = useState<string[]>([]);
 
   const [configuratorData, setConfiguratorData] = useState<ConfiguratorData>({
     sizes: [
@@ -697,7 +697,7 @@ const page = () => {
     )?.isActive;
 
     const interior = configuratorData.interiorFinishes.find(i => i.isActive);
-    setSelectedInterior(interior?.name);
+    setSelectedInterior(interior?.name ?? '');
 
     const colorName = activeColor?.name.toLocaleLowerCase();
     if (activeColor) {
