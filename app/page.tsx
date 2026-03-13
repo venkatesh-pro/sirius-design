@@ -102,6 +102,8 @@ type ConfiguratorProps = {
   configuratorData: ConfiguratorData;
   setConfiguratorData: React.Dispatch<React.SetStateAction<ConfiguratorData>>;
   setSliderImages: React.Dispatch<React.SetStateAction<string[]>>;
+  handleImageConfiguration: () => void;
+  isInInteriorSection: React.MutableRefObject<boolean>;
 };
 
 const Configurator = ({
@@ -109,6 +111,7 @@ const Configurator = ({
   setConfiguratorData,
   setSliderImages,
   handleImageConfiguration,
+  isInInteriorSection,
 }: ConfiguratorProps) => {
   const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -160,15 +163,16 @@ const Configurator = ({
         end: '30% top',
         markers: false,
         onEnter: () => {
+          isInInteriorSection.current = true;
           const interior = configuratorData.interiorFinishes.find(i => i.isActive);
 
           const image = `/configuratorImages/interior/${
             interior?.name === 'Standard Interior' ? 'I2.jpg' : 'I1.jpg'
           }`;
-
           setSliderImages([image]);
         },
         onEnterBack: () => {
+          isInInteriorSection.current = true;
           const interior = configuratorData.interiorFinishes.find(i => i.isActive);
           const image = `/configuratorImages/interior/${
             interior?.name === 'Standard Interior' ? 'I2.jpg' : 'I1.jpg'
@@ -176,9 +180,11 @@ const Configurator = ({
           setSliderImages([image]);
         },
         onLeave: () => {
+          isInInteriorSection.current = false;
           handleImageConfiguration();
         },
         onLeaveBack: () => {
+          isInInteriorSection.current = false;
           handleImageConfiguration();
         },
       });
@@ -739,6 +745,8 @@ const page = () => {
 
   const [selectedInterior, setSelectedInterior] = useState('');
 
+  const isInInteriorSection = useRef(false);
+
   const handleImageConfiguration = () => {
     const activeColor = configuratorData.exteriorFinishes.find(c => c.isActive);
     const deck = configuratorData.optionalUpgrades.find(u => u.name === 'Step Deck')?.isActive;
@@ -750,7 +758,10 @@ const page = () => {
     setSelectedInterior(interior?.name ?? '');
 
     const colorName = activeColor?.name.toLocaleLowerCase();
-    if (activeColor) {
+
+    console.log(isInInteriorSection.current);
+
+    if (isInInteriorSection.current === false) {
       const image = `/configuratorImages/${colorName}/${
         interior?.name === 'Standard Interior' ? 'standard-' : ''
       }${colorName}-${deck ? 'deck' : 'no-deck'}-${brand ? 'brand' : 'no-brand'}.jpg`;
@@ -762,25 +773,28 @@ const page = () => {
   };
   useEffect(() => {
     handleImageConfiguration();
-  }, [configuratorData]);
+  }, [configuratorData, isInInteriorSection.current]);
 
   return (
-    <div className="flex justify-between">
-      <div className="h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
-        <Navbar />
-        <div className="h-[calc(100%-56px)] w-full">
-          <Slider sliderImages={sliderImages} />
+    <>
+      <div className="flex justify-between">
+        <div className="h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
+          <Navbar />
+          <div className="h-[calc(100%-56px)] w-full">
+            <Slider sliderImages={sliderImages} />
+          </div>
+        </div>
+        <div className="mt-[140px] w-[30vw] ">
+          <Configurator
+            configuratorData={configuratorData}
+            setConfiguratorData={setConfiguratorData}
+            setSliderImages={setSliderImages}
+            handleImageConfiguration={handleImageConfiguration}
+            isInInteriorSection={isInInteriorSection}
+          />
         </div>
       </div>
-      <div className="mt-[140px] w-[30vw] ">
-        <Configurator
-          configuratorData={configuratorData}
-          setConfiguratorData={setConfiguratorData}
-          setSliderImages={setSliderImages}
-          handleImageConfiguration={handleImageConfiguration}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 
