@@ -691,13 +691,13 @@ const Configurator = () => {
 const page = () => {
   return (
     <div className="flex justify-between">
-      <div className="h-[100dvh] sticky top-0 min-w-[1248px] wrapper">
+      <div className="h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
         <Navbar />
         <div className="h-[calc(100%-56px)] w-full bg-blue-400 ">
           <Slider />
         </div>
       </div>
-      <div className="mt-[140px]">
+      <div className="mt-[140px] w-[30vw] ">
         <Configurator />
       </div>
     </div>
