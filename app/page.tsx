@@ -194,244 +194,440 @@ const Configurator = ({
 
   return (
     <>
-      <div className="mx-[48px]">
-        {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
-        <div>
-          <h1 className="text-[40px] font-[400] leading-[100%] tracking-[0%] text-[#171A20]">
-            Sirius Shell
-          </h1>
-          <div className="mt-[20px]">
-            <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
-              Modular Commercial Infrastructure
-            </p>
-            <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[10px]">
-              Designed and manufactured in Australia. Fully assembled modular building. Delivered
-              complete and ready for fit-out.
-            </p>
-          </div>
-        </div>
-
-        {/* TODO: fix the box text max width */}
-        {/* size */}
-        <div className="mt-[60px]">
-          <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
-            <span className="text-[#171A20]">Size.</span>{' '}
-            <span className="text-[#808080]">How much space do you need?</span>
-          </h1>
-          <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[8px]">
-            All models are delivered as open floor space ready for custom fit-out.
-          </p>
-          <div className="">
-            {configuratorData.sizes.map((size, sizeIndex) => {
-              return (
-                <div
-                  key={sizeIndex}
-                  className={`cursor-pointer py-[22px]  px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
-                    size.isActive && '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
-                  }`}
-                  onClick={() => {
-                    const updatedData = {
-                      ...configuratorData,
-                      sizes: configuratorData.sizes.map(s =>
-                        s.name === size.name ? { ...s, isActive: true } : { ...s, isActive: false }
-                      ),
-                    };
-                    setConfiguratorData(updatedData);
-                  }}
-                >
-                  <div>
-                    <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
-                      {size.name}
-                    </p>
-                    <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
-                      {size.value} {size.unit}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
-                      From {formatPrice(size.pricing.currency, size.pricing.price)}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* exterior finish */}
-        <div className="mt-[60px]">
-          <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
-            <span className="text-[#171A20]">Exterior finish.</span>{' '}
-            <span className="text-[#808080]">Pick your favourite.</span>
-          </h1>
-          <div className="mt-[16px]">
-            <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
-              {
-                configuratorData.exteriorFinishes.find(exteriorFinish => exteriorFinish.isActive)
-                  ?.name
-              }
-            </p>
-            <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[5px]">
-              Included
-            </p>
-          </div>
-          <div className="mt-[16px] flex gap-[17px] ">
-            {configuratorData.exteriorFinishes.map((exteriorFinish, exteriorFinishIndex) => {
-              return (
-                <div
-                  key={exteriorFinishIndex}
-                  className={` flex items-center justify-center p-[5px] border-2 border-transparent cursor-pointer ${
-                    exteriorFinish.isActive ? 'border-2 rounded-full border-[#171A20]' : ''
-                  }`}
-                  style={{
-                    border: `${
-                      exteriorFinish.isActive ? '2px solid #171A20' : '2px solid transparent'
-                    }`,
-                  }}
-                  onClick={() => {
-                    const updatedData = {
-                      ...configuratorData,
-                      exteriorFinishes: configuratorData.exteriorFinishes.map(s =>
-                        s.name === exteriorFinish.name
-                          ? { ...s, isActive: true }
-                          : { ...s, isActive: false }
-                      ),
-                    };
-                    setConfiguratorData(updatedData);
-                  }}
-                >
-                  <div
-                    key={exteriorFinishIndex}
-                    className={`w-[35px] h-[35px] rounded-full `}
-                    style={{
-                      background: exteriorFinish.color,
-                    }}
-                  ></div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* interior finish */}
-        <div className="mt-[60px]" ref={interiorSectionRef}>
-          <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
-            <span className="text-[#171A20]">Interior finish.</span>{' '}
-            <span className="text-[#808080]">How ready should the interior be?</span>
-          </h1>
-          <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
-            All models include open interior with lighting and power ready for use.
-          </p>
-
+      {isSubmitted !== true && (
+        <div className="mx-[48px] mt-[140px]">
+          {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
           <div>
-            {configuratorData.interiorFinishes.map((interiorFinish, interiorFinishIndex) => {
-              return (
-                <div
-                  key={interiorFinishIndex}
-                  className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]  ${
-                    interiorFinish.isActive &&
-                    '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
-                  }`}
-                  onClick={() => {
-                    const updatedData = {
-                      ...configuratorData,
-                      interiorFinishes: configuratorData.interiorFinishes.map(s =>
-                        s.name === interiorFinish.name
-                          ? { ...s, isActive: true }
-                          : { ...s, isActive: false }
-                      ),
-                    };
-                    setConfiguratorData(updatedData);
-                  }}
-                >
-                  <div>
-                    <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
-                      {interiorFinish.name}
-                    </p>
-                    <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
-                      {interiorFinish.description}
-                    </p>
+            <h1 className="text-[40px] font-[400] leading-[100%] tracking-[0%] text-[#171A20]">
+              Sirius Shell
+            </h1>
+            <div className="mt-[20px]">
+              <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
+                Modular Commercial Infrastructure
+              </p>
+              <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[10px]">
+                Designed and manufactured in Australia. Fully assembled modular building. Delivered
+                complete and ready for fit-out.
+              </p>
+            </div>
+          </div>
 
+          {/* TODO: fix the box text max width */}
+          {/* size */}
+          <div className="mt-[60px]">
+            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+              <span className="text-[#171A20]">Size.</span>{' '}
+              <span className="text-[#808080]">How much space do you need?</span>
+            </h1>
+            <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[8px]">
+              All models are delivered as open floor space ready for custom fit-out.
+            </p>
+            <div className="">
+              {configuratorData.sizes.map((size, sizeIndex) => {
+                return (
+                  <div
+                    key={sizeIndex}
+                    className={`cursor-pointer py-[22px]  px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
+                      size.isActive && '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
+                    }`}
+                    onClick={() => {
+                      const updatedData = {
+                        ...configuratorData,
+                        sizes: configuratorData.sizes.map(s =>
+                          s.name === size.name
+                            ? { ...s, isActive: true }
+                            : { ...s, isActive: false }
+                        ),
+                      };
+                      setConfiguratorData(updatedData);
+                    }}
+                  >
                     <div>
-                      <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[100%] mt-[16px]">
-                        Includes:
+                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                        {size.name}
                       </p>
-                      <ul className="">
-                        {interiorFinish.includes.map((include, includeIndex) => {
-                          return (
-                            <li
-                              key={includeIndex}
-                              className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[100%] mt-[6px]"
-                            >
-                              {include}
-                            </li>
-                          );
-                        })}
-                      </ul>
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                        {size.value} {size.unit}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                        From {formatPrice(size.pricing.currency, size.pricing.price)}
+                      </p>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
-                      {formatPrice(interiorFinish.pricing.currency, interiorFinish.pricing.price)}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* optional upgrades */}
-        <div className="mt-[60px]">
-          <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
-            <span className="text-[#171A20]">Optional upgrades.</span>{' '}
-            <span className="text-[#808080]">Select the options that work for you.</span>
-          </h1>
-
-          <div>
-            {configuratorData.optionalUpgrades.map((optionalUpgrade, optionalUpgradeIndex) => {
-              return (
-                <div
-                  onClick={() => {
-                    const updatedData = {
-                      ...configuratorData,
-                      optionalUpgrades: configuratorData.optionalUpgrades.map(optional => {
-                        return optional.name === optionalUpgrade.name
-                          ? { ...optional, isActive: !optional.isActive }
-                          : optional;
-                      }),
-                    };
-                    setConfiguratorData(updatedData);
-                  }}
-                  key={optionalUpgradeIndex}
-                  className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
-                    optionalUpgrade.isActive &&
-                    '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
-                  }`}
-                >
-                  <div>
-                    <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
-                      {optionalUpgrade.name}
-                    </p>
-                    <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
-                      {optionalUpgrade.description}
-                    </p>
+          {/* exterior finish */}
+          <div className="mt-[60px]">
+            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+              <span className="text-[#171A20]">Exterior finish.</span>{' '}
+              <span className="text-[#808080]">Pick your favourite.</span>
+            </h1>
+            <div className="mt-[16px]">
+              <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
+                {
+                  configuratorData.exteriorFinishes.find(exteriorFinish => exteriorFinish.isActive)
+                    ?.name
+                }
+              </p>
+              <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[5px]">
+                Included
+              </p>
+            </div>
+            <div className="mt-[16px] flex gap-[17px] ">
+              {configuratorData.exteriorFinishes.map((exteriorFinish, exteriorFinishIndex) => {
+                return (
+                  <div
+                    key={exteriorFinishIndex}
+                    className={` flex items-center justify-center p-[5px] border-2 border-transparent cursor-pointer ${
+                      exteriorFinish.isActive ? 'border-2 rounded-full border-[#171A20]' : ''
+                    }`}
+                    style={{
+                      border: `${
+                        exteriorFinish.isActive ? '2px solid #171A20' : '2px solid transparent'
+                      }`,
+                    }}
+                    onClick={() => {
+                      const updatedData = {
+                        ...configuratorData,
+                        exteriorFinishes: configuratorData.exteriorFinishes.map(s =>
+                          s.name === exteriorFinish.name
+                            ? { ...s, isActive: true }
+                            : { ...s, isActive: false }
+                        ),
+                      };
+                      setConfiguratorData(updatedData);
+                    }}
+                  >
+                    <div
+                      key={exteriorFinishIndex}
+                      className={`w-[35px] h-[35px] rounded-full `}
+                      style={{
+                        background: exteriorFinish.color,
+                      }}
+                    ></div>
                   </div>
-                  <div>
-                    <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
-                      {formatPrice(optionalUpgrade.pricing.currency, optionalUpgrade.pricing.price)}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        {/* optional upgrades */}
-        <div className="mt-[60px]">
-          <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
-            Estimated price:
+          {/* interior finish */}
+          <div className="mt-[60px]" ref={interiorSectionRef}>
+            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+              <span className="text-[#171A20]">Interior finish.</span>{' '}
+              <span className="text-[#808080]">How ready should the interior be?</span>
+            </h1>
+            <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
+              All models include open interior with lighting and power ready for use.
+            </p>
+
+            <div>
+              {configuratorData.interiorFinishes.map((interiorFinish, interiorFinishIndex) => {
+                return (
+                  <div
+                    key={interiorFinishIndex}
+                    className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]  ${
+                      interiorFinish.isActive &&
+                      '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
+                    }`}
+                    onClick={() => {
+                      const updatedData = {
+                        ...configuratorData,
+                        interiorFinishes: configuratorData.interiorFinishes.map(s =>
+                          s.name === interiorFinish.name
+                            ? { ...s, isActive: true }
+                            : { ...s, isActive: false }
+                        ),
+                      };
+                      setConfiguratorData(updatedData);
+                    }}
+                  >
+                    <div>
+                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                        {interiorFinish.name}
+                      </p>
+                      <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                        {interiorFinish.description}
+                      </p>
+
+                      <div>
+                        <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[100%] mt-[16px]">
+                          Includes:
+                        </p>
+                        <ul className="">
+                          {interiorFinish.includes.map((include, includeIndex) => {
+                            return (
+                              <li
+                                key={includeIndex}
+                                className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[100%] mt-[6px]"
+                              >
+                                {include}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                        {formatPrice(interiorFinish.pricing.currency, interiorFinish.pricing.price)}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* optional upgrades */}
+          <div className="mt-[60px]">
+            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+              <span className="text-[#171A20]">Optional upgrades.</span>{' '}
+              <span className="text-[#808080]">Select the options that work for you.</span>
+            </h1>
+
+            <div>
+              {configuratorData.optionalUpgrades.map((optionalUpgrade, optionalUpgradeIndex) => {
+                return (
+                  <div
+                    onClick={() => {
+                      const updatedData = {
+                        ...configuratorData,
+                        optionalUpgrades: configuratorData.optionalUpgrades.map(optional => {
+                          return optional.name === optionalUpgrade.name
+                            ? { ...optional, isActive: !optional.isActive }
+                            : optional;
+                        }),
+                      };
+                      setConfiguratorData(updatedData);
+                    }}
+                    key={optionalUpgradeIndex}
+                    className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
+                      optionalUpgrade.isActive &&
+                      '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
+                    }`}
+                  >
+                    <div>
+                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                        {optionalUpgrade.name}
+                      </p>
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                        {optionalUpgrade.description}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                        {formatPrice(
+                          optionalUpgrade.pricing.currency,
+                          optionalUpgrade.pricing.price
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* optional upgrades */}
+          <div className="mt-[60px]">
+            <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+              Estimated price:
+            </p>
+            <p className="mt-[4px]">
+              <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
+                A{formatPrice('dollar', totalPrice)}
+              </span>
+              <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                + GST
+              </span>
+            </p>
+
+            <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[20px]">
+              Estimated lead time:
+            </p>
+            <p className="mt-[4px] text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+              3-6 weeks depending on production schedule.
+            </p>
+            <p className="mt-[20px] text-[#5C5E62] text-[12px] font-[400] tracking-[1.5%] leading-[100%]">
+              Final delivery cost and site preparation may vary depending on location and
+              installation requirements.
+            </p>
+            {isContinue === false && (
+              <button
+                onClick={() => {
+                  setIsContinue(true);
+                }}
+                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
+              >
+                Continue
+              </button>
+            )}
+          </div>
+
+          <div className="h-[80px]"></div>
+          {/* submit details */}
+          {isContinue && (
+            <div>
+              <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[100%]">
+                Submit details to confirm price and delivery availability.
+              </p>
+              <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
+                Receive a formal proposal and delivery timeline for your project.
+              </p>
+
+              <div className="mt-[24px] flex flex-col gap-[16px]">
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'company'}
+                    placeholder={'Company'}
+                    register={register}
+                    type={'text'}
+                    errors={errors}
+                  />
+                  {errors.company && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.company.message as string}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'name'}
+                    placeholder={'Name'}
+                    register={register}
+                    type={'text'}
+                    errors={errors}
+                  />
+                  {errors.name && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.name.message as string}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'siteAddress'}
+                    placeholder={'Site Address'}
+                    register={register}
+                    type={'text'}
+                    errors={errors}
+                  />
+                  {errors.siteAddress && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.siteAddress.message as string}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'postalCode'}
+                    placeholder={'Postal Code'}
+                    register={register}
+                    type={'number'}
+                    errors={errors}
+                  />
+                  {errors.postalCode && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.postalCode.message as string}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'projectType'}
+                    placeholder={'Project Type'}
+                    register={register}
+                    type={'text'}
+                    errors={errors}
+                  />
+                  {errors.projectType && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.projectType.message as string}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'emailAddress'}
+                    placeholder={'Email Address'}
+                    register={register}
+                    type={'email'}
+                    errors={errors}
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  />
+                  {errors.emailAddress && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.emailAddress.message as string}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <InputField
+                    isRequired={true}
+                    label={'phoneNumber'}
+                    placeholder={'Phone Number'}
+                    register={register}
+                    type={'text'}
+                    errors={errors}
+                  />
+                  {errors.phoneNumber && (
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                      {errors.phoneNumber.message as string}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
+                Estimated production lead time: 3-6 weeks from confirmed order.
+              </p>
+              <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[100%] font-[400] text-[#5C5E62]">
+                Pricing shown is indicative based on selected configuration. Delivery, installation
+                and permits may vary by site and location.
+              </p>
+              <button
+                onClick={handleSubmit(onSubmit)}
+                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
+              >
+                Request Proposal
+              </button>
+            </div>
+          )}
+          {isContinue === true && <div className="h-[80px]"></div>}
+        </div>
+      )}
+      {isSubmitted && (
+        <div className="mx-[48px] flex items-center justify-center flex-col h-[100%]">
+          <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%] text-center">
+            Your proposal request has been submitted.
+          </p>
+          <button
+            className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]"
+            onClick={() => (window.location.href = '')}
+          >
+            Explore Sirius Shell
+          </button>
+        </div>
+      )}
+
+      {/* stick pricing div */}
+      {isSubmitted !== true && (
+        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]">
+          <p className="text-[15px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
+            Estimated Price
           </p>
           <p className="mt-[4px]">
             <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
@@ -442,198 +638,11 @@ const Configurator = ({
             </span>
           </p>
 
-          <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[20px]">
-            Estimated lead time:
+          <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[4px]">
+            Estimated lead time: 3-6 weeks
           </p>
-          <p className="mt-[4px] text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
-            3-6 weeks depending on production schedule.
-          </p>
-          <p className="mt-[20px] text-[#5C5E62] text-[12px] font-[400] tracking-[1.5%] leading-[100%]">
-            Final delivery cost and site preparation may vary depending on location and installation
-            requirements.
-          </p>
-          {isContinue === false && (
-            <button
-              onClick={() => {
-                setIsContinue(true);
-              }}
-              className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
-            >
-              Continue
-            </button>
-          )}
         </div>
-
-        <div className="h-[80px]"></div>
-        {/* submit details */}
-        {isContinue && (
-          <div>
-            <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[100%]">
-              Submit details to confirm price and delivery availability.
-            </p>
-            <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
-              Receive a formal proposal and delivery timeline for your project.
-            </p>
-
-            <div className="mt-[24px] flex flex-col gap-[16px]">
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'company'}
-                  placeholder={'Company'}
-                  register={register}
-                  type={'text'}
-                  errors={errors}
-                />
-                {errors.company && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.company.message as string}
-                  </p>
-                )}
-              </div>
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'name'}
-                  placeholder={'Name'}
-                  register={register}
-                  type={'text'}
-                  errors={errors}
-                />
-                {errors.name && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.name.message as string}
-                  </p>
-                )}
-              </div>
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'siteAddress'}
-                  placeholder={'Site Address'}
-                  register={register}
-                  type={'text'}
-                  errors={errors}
-                />
-                {errors.siteAddress && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.siteAddress.message as string}
-                  </p>
-                )}
-              </div>
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'postalCode'}
-                  placeholder={'Postal Code'}
-                  register={register}
-                  type={'number'}
-                  errors={errors}
-                />
-                {errors.postalCode && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.postalCode.message as string}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'projectType'}
-                  placeholder={'Project Type'}
-                  register={register}
-                  type={'text'}
-                  errors={errors}
-                />
-                {errors.projectType && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.projectType.message as string}
-                  </p>
-                )}
-              </div>
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'emailAddress'}
-                  placeholder={'Email Address'}
-                  register={register}
-                  type={'email'}
-                  errors={errors}
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                />
-                {errors.emailAddress && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.emailAddress.message as string}
-                  </p>
-                )}
-              </div>
-              <div>
-                <InputField
-                  isRequired={true}
-                  label={'phoneNumber'}
-                  placeholder={'Phone Number'}
-                  register={register}
-                  type={'text'}
-                  errors={errors}
-                />
-                {errors.phoneNumber && (
-                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
-                    {errors.phoneNumber.message as string}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
-              Estimated production lead time: 3-6 weeks from confirmed order.
-            </p>
-            <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[100%] font-[400] text-[#5C5E62]">
-              Pricing shown is indicative based on selected configuration. Delivery, installation
-              and permits may vary by site and location.
-            </p>
-            <button
-              onClick={handleSubmit(onSubmit)}
-              className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
-            >
-              Request Proposal
-            </button>
-          </div>
-        )}
-
-        {isSubmitted && (
-          <div>
-            <p className="mt-[32px] text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%]">
-              Your proposal request has been submitted.
-            </p>
-            <button className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
-              Explore Sirius Shell
-            </button>
-          </div>
-        )}
-
-        {isContinue === true && isSubmitted === false && <div className="h-[80px]"></div>}
-
-        {isSubmitted && <div className="h-[160px]"></div>}
-      </div>
-
-      <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]">
-        <p className="text-[15px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
-          Estimated Price
-        </p>
-        <p className="mt-[4px]">
-          <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
-            A{formatPrice('dollar', totalPrice)}
-          </span>
-          <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
-            + GST
-          </span>
-        </p>
-
-        <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[4px]">
-          Estimated lead time: 3-6 weeks
-        </p>
-      </div>
+      )}
     </>
   );
 };
@@ -784,7 +793,7 @@ const page = () => {
             <Slider sliderImages={sliderImages} />
           </div>
         </div>
-        <div className="mt-[140px] w-[30vw] ">
+        <div className=" w-[30vw] ">
           <Configurator
             configuratorData={configuratorData}
             setConfiguratorData={setConfiguratorData}
