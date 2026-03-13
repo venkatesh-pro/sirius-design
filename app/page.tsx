@@ -446,11 +446,11 @@ const Configurator = () => {
                   onClick={() => {
                     const updatedData = {
                       ...configuratorData,
-                      optionalUpgrades: configuratorData.optionalUpgrades.map(s =>
-                        s.name === optionalUpgrade.name
-                          ? { ...s, isActive: true }
-                          : { ...s, isActive: false }
-                      ),
+                      optionalUpgrades: configuratorData.optionalUpgrades.map(optional => {
+                        return optional.name === optionalUpgrade.name
+                          ? { ...optional, isActive: !optional.isActive }
+                          : optional;
+                      }),
                     };
                     setConfiguratorData(updatedData);
                   }}
