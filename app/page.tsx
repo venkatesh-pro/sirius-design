@@ -2,7 +2,7 @@
 
 import Navbar from '@/components/Navbar';
 import Slider from '@/components/Slider/Slider';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FieldErrors, FieldValues, useForm, UseFormRegister } from 'react-hook-form';
 
 // const Slider = ({ sliderImages, setSliderImages }) => {
@@ -579,23 +579,14 @@ const Configurator = ({ configuratorData, setConfiguratorData }) => {
 };
 const page = () => {
   const [sliderImages, setSliderImages] = useState([
-    '/configuratorImages/BLACK/B1.jpg',
-    '/ConfiguratorImages/BLACK/B2.jpg',
-    '/ConfiguratorImages/BLACK/B3.jpg',
+    // '/configuratorImages/BLACK/B1.jpg',
+    // '/ConfiguratorImages/BLACK/B2.jpg',
+    // '/ConfiguratorImages/BLACK/B3.jpg',
+    // '/ConfiguratorImages/BLACK/B4.jpg', // b3 and b4 for the deck
   ]);
 
   const [configuratorData, setConfiguratorData] = useState<ConfiguratorData>({
     sizes: [
-      {
-        name: '4.0m x 3.2m',
-        value: 12.8,
-        unit: 'sqm',
-        pricing: {
-          price: 32000,
-          currency: 'dollar',
-        },
-        isActive: true,
-      },
       {
         name: '6.0m x 3.2m',
         value: 19.2,
@@ -604,7 +595,7 @@ const page = () => {
           price: 42000,
           currency: 'dollar',
         },
-        isActive: false,
+        isActive: true,
       },
     ],
     exteriorFinishes: [
@@ -615,17 +606,17 @@ const page = () => {
       },
       {
         color: '#E6E6E6',
-        name: 'Mercury',
+        name: 'White',
         isActive: false,
       },
       {
         color: '#CDCCC2',
-        name: 'Pastel Grey',
+        name: 'Sand',
         isActive: false,
       },
       {
         color: '#505051',
-        name: 'Vampire Grey',
+        name: 'Charcoal',
         isActive: false,
       },
     ],
@@ -696,11 +687,35 @@ const page = () => {
     ],
   });
 
+  const [selectedInterior, setSelectedInterior] = useState('');
+
+  useEffect(() => {
+    const activeColor = configuratorData.exteriorFinishes.find(c => c.isActive);
+    const deck = configuratorData.optionalUpgrades.find(u => u.name === 'Step Deck')?.isActive;
+    const brand = configuratorData.optionalUpgrades.find(
+      u => u.name === 'Brand Facade Panel'
+    )?.isActive;
+
+    const interior = configuratorData.interiorFinishes.find(i => i.isActive);
+    setSelectedInterior(interior?.name);
+
+    const colorName = activeColor?.name.toLocaleLowerCase();
+    if (activeColor) {
+      const image = `/configuratorImages/${colorName}/${
+        interior?.name === 'Standard Interior' ? 'standard-' : ''
+      }${colorName}-${deck ? 'deck' : 'no-deck'}-${brand ? 'brand' : 'no-brand'}.jpg`;
+
+      console.log({ image });
+
+      setSliderImages([image]);
+    }
+  }, [configuratorData]);
+
   return (
     <div className="flex justify-between">
       <div className="h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
         <Navbar />
-        <div className="h-[calc(100%-56px)] w-full bg-blue-400 ">
+        <div className="h-[calc(100%-56px)] w-full">
           <Slider sliderImages={sliderImages} />
         </div>
       </div>
