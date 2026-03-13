@@ -1,13 +1,19 @@
 'use client';
 
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
 import Navbar from '@/components/Navbar';
 import Slider from '@/components/Slider/Slider';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { FieldErrors, FieldValues, useForm, UseFormRegister } from 'react-hook-form';
 
 // const Slider = ({ sliderImages, setSliderImages }) => {
 //   return <img src={'/banner1.jpg'} className="h-full w-full"></img>;
 // };
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const formatPrice = (currency: string, value: number) => {
   return `${currency === 'dollar' && '$'}${new Intl.NumberFormat().format(value)}`;
@@ -95,12 +101,19 @@ type ConfiguratorData = {
 type ConfiguratorProps = {
   configuratorData: ConfiguratorData;
   setConfiguratorData: React.Dispatch<React.SetStateAction<ConfiguratorData>>;
+  setSliderImages: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-const Configurator = ({ configuratorData, setConfiguratorData }: ConfiguratorProps) => {
+const Configurator = ({
+  configuratorData,
+  setConfiguratorData,
+  setSliderImages,
+  handleImageConfiguration,
+}: ConfiguratorProps) => {
   const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const interiorSectionRef = useRef<HTMLDivElement>(null);
   const {
     register,
     handleSubmit,
@@ -136,6 +149,42 @@ const Configurator = ({ configuratorData, setConfiguratorData }: ConfiguratorPro
   const totalPrice = useMemo(() => {
     return calculateTotalPrice(configuratorData);
   }, [configuratorData]);
+
+  useGSAP(
+    () => {
+      if (!interiorSectionRef.current) return;
+
+      ScrollTrigger.create({
+        trigger: interiorSectionRef.current,
+        start: 'top 60%',
+        end: '30% top',
+        markers: false,
+        onEnter: () => {
+          const interior = configuratorData.interiorFinishes.find(i => i.isActive);
+
+          const image = `/configuratorImages/interior/${
+            interior?.name === 'Standard Interior' ? 'I2.jpg' : 'I1.jpg'
+          }`;
+
+          setSliderImages([image]);
+        },
+        onEnterBack: () => {
+          const interior = configuratorData.interiorFinishes.find(i => i.isActive);
+          const image = `/configuratorImages/interior/${
+            interior?.name === 'Standard Interior' ? 'I2.jpg' : 'I1.jpg'
+          }`;
+          setSliderImages([image]);
+        },
+        onLeave: () => {
+          handleImageConfiguration();
+        },
+        onLeaveBack: () => {
+          handleImageConfiguration();
+        },
+      });
+    },
+    { dependencies: [configuratorData], revertOnUpdate: true }
+  );
 
   return (
     <>
@@ -259,7 +308,7 @@ const Configurator = ({ configuratorData, setConfiguratorData }: ConfiguratorPro
         </div>
 
         {/* interior finish */}
-        <div className="mt-[60px]">
+        <div className="mt-[60px]" ref={interiorSectionRef}>
           <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
             <span className="text-[#171A20]">Interior finish.</span>{' '}
             <span className="text-[#808080]">How ready should the interior be?</span>
@@ -582,6 +631,7 @@ const Configurator = ({ configuratorData, setConfiguratorData }: ConfiguratorPro
     </>
   );
 };
+
 const page = () => {
   const [sliderImages, setSliderImages] = useState<string[]>([]);
 
@@ -689,7 +739,7 @@ const page = () => {
 
   const [selectedInterior, setSelectedInterior] = useState('');
 
-  useEffect(() => {
+  const handleImageConfiguration = () => {
     const activeColor = configuratorData.exteriorFinishes.find(c => c.isActive);
     const deck = configuratorData.optionalUpgrades.find(u => u.name === 'Step Deck')?.isActive;
     const brand = configuratorData.optionalUpgrades.find(
@@ -709,6 +759,9 @@ const page = () => {
 
       setSliderImages([image]);
     }
+  };
+  useEffect(() => {
+    handleImageConfiguration();
   }, [configuratorData]);
 
   return (
@@ -723,6 +776,8 @@ const page = () => {
         <Configurator
           configuratorData={configuratorData}
           setConfiguratorData={setConfiguratorData}
+          setSliderImages={setSliderImages}
+          handleImageConfiguration={handleImageConfiguration}
         />
       </div>
     </div>
