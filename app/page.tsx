@@ -210,7 +210,7 @@ const Configurator = ({
   return (
     <>
       {isSubmitted !== true && (
-        <div className="mx-[48px] mt-[140px]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[140px]">
           {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
           <div>
             <h1 className="text-[40px] font-[400] leading-[100%] tracking-[0%] text-[#171A20]">
@@ -625,7 +625,7 @@ const Configurator = ({
         </div>
       )}
       {isSubmitted && (
-        <div className="mx-[48px] flex items-center justify-center flex-col h-[100%]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[100%]">
           <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%] text-center">
             Your proposal request has been submitted.
           </p>
