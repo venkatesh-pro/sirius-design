@@ -78,9 +78,10 @@ const Slider: React.FC<SliderProps> = ({ sliderImages }) => {
             <img
               src={image}
               alt={`Slide ${i}`}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full rounded-[12px]"
               width={1000}
               height={1000}
+              
             />
           </div>
         ))}

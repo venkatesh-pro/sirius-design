@@ -874,7 +874,7 @@ const page = () => {
       <div className="min-[1303px]:flex justify-between">
         <div className="max-[1303px]:hidden h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
           <Navbar />
-          <div className="h-[calc(100%-56px)] w-full">
+          <div className="h-[calc(100%-(56px+56px))] w-full">
             <Slider sliderImages={sliderImages} />
           </div>
         </div>
