@@ -881,7 +881,7 @@ const page = () => {
           <Navbar />
         </div>
 
-        <div className="min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100dvh-56px)] h-[calc(100dvh-(14px+21px+21px))] overflow-scroll">
+        <div className="min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100dvh-56px)] min-h-[calc(100dvh-(14px+21px+21px))] overflow-scroll">
           <Configurator
             configuratorData={configuratorData}
             setConfiguratorData={setConfiguratorData}
