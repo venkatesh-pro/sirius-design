@@ -38,7 +38,7 @@ const InputField = ({
 }) => {
   return (
     <input
-      className={`h-[56px] w-full py-[20px] px-[24px] rounded-[100px] border-[1px] border-[#C4C4C4] focus:outline-[1px] focus:outline-[#171A20] focus:border-[#171A20] placeholder:text-[#5C5E62] text-[17px] font-[400] placeholder:text-[17px] placeholder:font-[400] tracking-[1%] leading-[100%] ${
+      className={`h-[56px] w-full py-[20px] px-[24px] rounded-[100px] border-[1px] border-[#C4C4C4] focus:outline-[1px] focus:outline-[#171A20] focus:border-[#171A20] placeholder:text-[#5C5E62] text-[17px] font-[400] placeholder:text-[17px] placeholder:font-[400] tracking-[1%] leading-[140%] ${
         errors?.[label] &&
         '!border-[#B74134] !placeholder-[#B74134] !bg-[#ED4E3B1A] active:!border-[#B74134] focus:!border-[#B74134] focus:!outline-none '
       }`}
@@ -218,14 +218,14 @@ const Configurator = ({
         <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[80px] min-[1303px]:mt-[140px]">
           {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
           <div>
-            <h1 className="text-[40px] font-[400] leading-[100%] tracking-[0%] text-[#171A20]">
+            <h1 className="text-[40px] font-[400] leading-[140%] tracking-[0%] text-[#171A20]">
               Sirius Shell
             </h1>
             <div className="mt-[20px]">
-              <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
+              <p className="text-[17px] font-[400] leading-[140%] tracking-[1%] text-[#171A20]">
                 Modular Commercial Infrastructure
               </p>
-              <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[10px]">
+              <p className="text-[14px] font-[400] leading-[140%] tracking-[1.5%] text-[#5C5E62] mt-[10px]">
                 Designed and manufactured in Australia. Fully assembled modular building. Delivered
                 complete and ready for fit-out.
               </p>
@@ -235,11 +235,11 @@ const Configurator = ({
           {/* TODO: fix the box text max width */}
           {/* size */}
           <div className="mt-[80px]">
-            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[400] leading-[140%] tracking-[1%] ">
               <span className="text-[#171A20]">Size.</span>{' '}
               <span className="text-[#808080]">How much space do you need?</span>
             </h1>
-            <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[8px]">
+            <p className="text-[14px] font-[400] leading-[140%] tracking-[1.5%] text-[#5C5E62] mt-[8px]">
               All models are delivered as open floor space ready for custom fit-out.
             </p>
             <div className="">
@@ -263,15 +263,15 @@ const Configurator = ({
                     }}
                   >
                     <div>
-                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[140%]">
                         {size.name}
                       </p>
-                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[5px]">
                         {size.value} {size.unit}
                       </p>
                     </div>
                     <div>
-                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
                         From {formatPrice(size.pricing.currency, size.pricing.price)}
                       </p>
                     </div>
@@ -289,18 +289,18 @@ const Configurator = ({
                 <img src={imageMobileExterior} alt="exterior image" className="rounded-[12px]" />
               )}
             </div>
-            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[400] leading-[140%] tracking-[1%] ">
               <span className="text-[#171A20]">Exterior finish.</span>{' '}
               <span className="text-[#808080]">Pick your favourite.</span>
             </h1>
             <div className="mt-[16px]">
-              <p className="text-[17px] font-[400] leading-[100%] tracking-[1%] text-[#171A20]">
+              <p className="text-[17px] font-[400] leading-[140%] tracking-[1%] text-[#171A20]">
                 {
                   configuratorData.exteriorFinishes.find(exteriorFinish => exteriorFinish.isActive)
                     ?.name
                 }
               </p>
-              <p className="text-[14px] font-[400] leading-[100%] tracking-[1.5%] text-[#5C5E62] mt-[5px]">
+              <p className="text-[14px] font-[400] leading-[140%] tracking-[1.5%] text-[#5C5E62] mt-[5px]">
                 Included
               </p>
             </div>
@@ -350,11 +350,11 @@ const Configurator = ({
                 <img src={imageMobileInterior} alt="interior image" className="rounded-[12px]" />
               )}
             </div>
-            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[400] leading-[140%] tracking-[1%] ">
               <span className="text-[#171A20]">Interior finish.</span>{' '}
               <span className="text-[#808080]">How ready should the interior be?</span>
             </h1>
-            <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
+            <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[8px]">
               All models include open interior with lighting and power ready for use.
             </p>
 
@@ -380,15 +380,15 @@ const Configurator = ({
                     }}
                   >
                     <div>
-                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[140%]">
                         {interiorFinish.name}
                       </p>
-                      <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                      <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[5px]">
                         {interiorFinish.description}
                       </p>
 
                       <div>
-                        <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[100%] mt-[16px]">
+                        <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[140%] mt-[16px]">
                           Includes:
                         </p>
                         <ul className="">
@@ -396,7 +396,7 @@ const Configurator = ({
                             return (
                               <li
                                 key={includeIndex}
-                                className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[100%] mt-[6px]"
+                                className="text-[14px] text-[#5C5E62] font-[400] tracking-[1.5%] leading-[140%] mt-[6px]"
                               >
                                 {include}
                               </li>
@@ -406,7 +406,7 @@ const Configurator = ({
                       </div>
                     </div>
                     <div>
-                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
                         {formatPrice(interiorFinish.pricing.currency, interiorFinish.pricing.price)}
                       </p>
                     </div>
@@ -424,7 +424,7 @@ const Configurator = ({
                 <img src={imageMobileExterior} alt="exterior image" className="rounded-[12px]" />
               )}
             </div>
-            <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[400] leading-[140%] tracking-[1%] ">
               <span className="text-[#171A20]">Optional upgrades.</span>{' '}
               <span className="text-[#808080]">Select the options that work for you.</span>
             </h1>
@@ -451,15 +451,15 @@ const Configurator = ({
                     }`}
                   >
                     <div>
-                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]">
+                      <p className="text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[140%]">
                         {optionalUpgrade.name}
                       </p>
-                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[5px]">
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[5px]">
                         {optionalUpgrade.description}
                       </p>
                     </div>
                     <div>
-                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+                      <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
                         {formatPrice(
                           optionalUpgrade.pricing.currency,
                           optionalUpgrade.pricing.price
@@ -474,26 +474,26 @@ const Configurator = ({
 
           {/* optional upgrades */}
           <div className="mt-[80px]">
-            <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+            <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
               Estimated price:
             </p>
             <p className="mt-[4px]">
-              <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
+              <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[140%]">
                 A{formatPrice('dollar', totalPrice)}
               </span>
               {' '}
-              <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+              <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
                 + GST
               </span>
             </p>
 
-            <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[20px]">
+            <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[20px]">
               Estimated lead time:
             </p>
-            <p className="mt-[4px] text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+            <p className="mt-[4px] text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
               3-6 weeks depending on production schedule.
             </p>
-            <p className="mt-[20px] text-[#5C5E62] text-[12px] font-[400] tracking-[1.5%] leading-[100%]">
+            <p className="mt-[20px] text-[#5C5E62] text-[12px] font-[400] tracking-[1.5%] leading-[140%]">
               Final delivery cost and site preparation may vary depending on location and
               installation requirements.
             </p>
@@ -502,7 +502,7 @@ const Configurator = ({
                 onClick={() => {
                   setIsContinue(true);
                 }}
-                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
+                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[140%]"
               >
                 Continue
               </button>
@@ -513,10 +513,10 @@ const Configurator = ({
           {/* submit details */}
           {isContinue && (
             <div>
-              <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[100%]">
+              <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[140%]">
                 Submit details to confirm price and delivery availability.
               </p>
-              <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[8px]">
+              <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[8px]">
                 Receive a formal proposal and delivery timeline for your project.
               </p>
 
@@ -531,7 +531,7 @@ const Configurator = ({
                     errors={errors}
                   />
                   {errors.company && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.company.message as string}
                     </p>
                   )}
@@ -546,7 +546,7 @@ const Configurator = ({
                     errors={errors}
                   />
                   {errors.name && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.name.message as string}
                     </p>
                   )}
@@ -561,7 +561,7 @@ const Configurator = ({
                     errors={errors}
                   />
                   {errors.siteAddress && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.siteAddress.message as string}
                     </p>
                   )}
@@ -576,7 +576,7 @@ const Configurator = ({
                     errors={errors}
                   />
                   {errors.postalCode && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.postalCode.message as string}
                     </p>
                   )}
@@ -592,7 +592,7 @@ const Configurator = ({
                     errors={errors}
                   />
                   {errors.projectType && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.projectType.message as string}
                     </p>
                   )}
@@ -608,7 +608,7 @@ const Configurator = ({
                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                   />
                   {errors.emailAddress && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.emailAddress.message as string}
                     </p>
                   )}
@@ -623,23 +623,23 @@ const Configurator = ({
                     errors={errors}
                   />
                   {errors.phoneNumber && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[100%] font-[400] text-[#B74134]">
+                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
                       {errors.phoneNumber.message as string}
                     </p>
                   )}
                 </div>
               </div>
 
-              <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
+              <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[140%] font-[400] text-[#171A20]">
                 Estimated production lead time: 3-6 weeks from confirmed order.
               </p>
-              <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[100%] font-[400] text-[#5C5E62]">
+              <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[140%] font-[400] text-[#5C5E62]">
                 Pricing shown is indicative based on selected configuration. Delivery, installation
                 and permits may vary by site and location.
               </p>
               <button
                 onClick={handleSubmit(onSubmit)}
-                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[100%]"
+                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[140%]"
               >
                 Request Proposal
               </button>
@@ -650,11 +650,11 @@ const Configurator = ({
       )}
       {isSubmitted && (
         <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[calc(100vh-56px)] min-[1303px]:h-[100%]">
-          <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%] text-center">
+          <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[140%] text-center">
             Your proposal request has been submitted.
           </p>
           <button
-            className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[100%]"
+            className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[140%]"
             onClick={() => (window.location.href = '')}
           >
             Explore Sirius Shell
@@ -665,20 +665,20 @@ const Configurator = ({
       {/* stick pricing div */}
       {isSubmitted !== true && (
         <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]">
-          <p className="text-[15px] tracking-[1.5%] leading-[100%] font-[400] text-[#171A20]">
+          <p className="text-[15px] tracking-[1.5%] leading-[140%] font-[400] text-[#171A20]">
             Estimated Price
           </p>
           <p className="mt-[4px]">
-            <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
+            <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[140%]">
               A{formatPrice('dollar', totalPrice)}
             </span>
             {' '}
-            <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
+            <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
               + GST
             </span>
           </p>
 
-          <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[100%] mt-[4px]">
+          <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[4px]">
             Estimated lead time: 3-6 weeks
           </p>
         </div>
