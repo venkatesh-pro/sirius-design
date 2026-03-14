@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-universal: var(--font-universal-sans);
   --font-mono: var(--font-geist-mono);
 
   --breakpoint-desktop: 1680px;

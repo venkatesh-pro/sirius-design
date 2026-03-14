@@ -1,22 +1,21 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import localFont from 'next/font/local';
 
 const universalSans = localFont({
   src: [
     {
-      path: '/fonts/Universal-Sans-Display-300.ttf',
+      path: './fonts/Universal-Sans-Display-300.ttf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '/fonts/Universal-Sans-Display-350.ttf',
+      path: './fonts/Universal-Sans-Display-350.ttf',
       weight: '350',
       style: 'normal',
     },
     {
-      path: '/fonts/Universal-Sans-Display-450.ttf',
+      path: './fonts/Universal-Sans-Display-450.ttf',
       weight: '450',
       style: 'normal',
     },
@@ -36,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${universalSans.variable} antialiased `}>{children}</body>
+      <body className={`${universalSans.variable} font-universal antialiased `}>{children}</body>
     </html>
   );
 }
