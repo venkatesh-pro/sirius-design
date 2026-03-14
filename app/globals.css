@@ -12,6 +12,7 @@
   --font-mono: var(--font-geist-mono);
 
   --breakpoint-desktop: 1680px;
+  /* --breakpoint-smallScreen: 1304px; */
 }
 
 @media (prefers-color-scheme: dark) {
