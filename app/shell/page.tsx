@@ -331,7 +331,7 @@ const Configurator = ({
                   >
                     <div
                       key={exteriorFinishIndex}
-                      className={`w-[35px] h-[35px] rounded-full `}
+                      className={`w-[35px] h-[35px] flex-none rounded-full `}
                       style={{
                         background: exteriorFinish.color,
                       }}
