@@ -229,7 +229,7 @@ const Configurator = ({
 
           {/* TODO: fix the box text max width */}
           {/* size */}
-          <div className="mt-[60px]">
+          <div className="mt-[80px]">
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Size.</span>{' '}
               <span className="text-[#808080]">How much space do you need?</span>
@@ -242,7 +242,7 @@ const Configurator = ({
                 return (
                   <div
                     key={sizeIndex}
-                    className={`cursor-pointer py-[22px]  px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
+                    className={`cursor-pointer py-[22px]  px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] desktop:min-w-[342px] ${
                       size.isActive && '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
                     }`}
                     onClick={() => {
@@ -277,7 +277,7 @@ const Configurator = ({
           </div>
 
           {/* exterior finish */}
-          <div className="mt-[60px]">
+          <div className="mt-[80px]">
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Exterior finish.</span>{' '}
               <span className="text-[#808080]">Pick your favourite.</span>
@@ -332,7 +332,7 @@ const Configurator = ({
           </div>
 
           {/* interior finish */}
-          <div className="mt-[60px]" ref={interiorSectionRef}>
+          <div className="mt-[80px]" ref={interiorSectionRef}>
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Interior finish.</span>{' '}
               <span className="text-[#808080]">How ready should the interior be?</span>
@@ -346,7 +346,7 @@ const Configurator = ({
                 return (
                   <div
                     key={interiorFinishIndex}
-                    className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px]  ${
+                    className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] desktop:min-w-[342px]  ${
                       interiorFinish.isActive &&
                       '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
                     }`}
@@ -400,7 +400,7 @@ const Configurator = ({
           </div>
 
           {/* optional upgrades */}
-          <div className="mt-[60px]">
+          <div className="mt-[80px]">
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Optional upgrades.</span>{' '}
               <span className="text-[#808080]">Select the options that work for you.</span>
@@ -422,7 +422,7 @@ const Configurator = ({
                       setConfiguratorData(updatedData);
                     }}
                     key={optionalUpgradeIndex}
-                    className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] min-w-[342px] ${
+                    className={`cursor-pointer py-[22px] px-[16px] flex  justify-between border-[#C4C4C4] border-[1px] rounded-[12px] mt-[16px] desktop:min-w-[342px] ${
                       optionalUpgrade.isActive &&
                       '!border-1 !border-[#171A20] outline-1 outline-[#171A20]'
                     }`}
@@ -450,7 +450,7 @@ const Configurator = ({
           </div>
 
           {/* optional upgrades */}
-          <div className="mt-[60px]">
+          <div className="mt-[80px]">
             <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
               Estimated price:
             </p>
@@ -801,14 +801,14 @@ const page = () => {
 
   return (
     <>
-      <div className="flex justify-between">
-        <div className="h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
+      <div className="min-[1303px]:flex justify-between">
+        <div className="max-[1303px]:hidden h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
           <Navbar />
           <div className="h-[calc(100%-56px)] w-full">
             <Slider sliderImages={sliderImages} />
           </div>
         </div>
-        <div className=" w-[30vw] ">
+        <div className="min-[1303px]:w-[30vw] ">
           <Configurator
             configuratorData={configuratorData}
             setConfiguratorData={setConfiguratorData}
