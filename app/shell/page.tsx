@@ -218,11 +218,11 @@ const Configurator = ({
         <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[80px] min-[1303px]:mt-[140px]">
           {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
           <div>
-            <h1 className="text-[40px] font-[500] leading-[140%] tracking-[0%] text-[#171A20]">
+            <h1 className="text-[40px] font-[500] leading-[120%] tracking-[0%] text-[#171A20]">
               Sirius Shell
             </h1>
             <div className="mt-[20px]">
-              <p className="text-[17px] font-[500] leading-[140%] tracking-[1%] text-[#171A20]">
+              <p className="text-[17px] font-[500] leading-[120%] tracking-[1%] text-[#171A20]">
                 Modular Commercial Infrastructure
               </p>
               <p className="text-[14px] font-[400] leading-[140%] tracking-[1.5%] text-[#5C5E62] mt-[10px]">
@@ -235,7 +235,7 @@ const Configurator = ({
           {/* TODO: fix the box text max width */}
           {/* size */}
           <div className="mt-[80px]">
-            <h1 className="text-[21px] font-[500] leading-[140%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[500] leading-[120%] tracking-[1%] ">
               <span className="text-[#171A20]">Size.</span>{' '}
               <span className="text-[#808080]">How much space do you need?</span>
             </h1>
@@ -289,7 +289,7 @@ const Configurator = ({
                 <img src={imageMobileExterior} alt="exterior image" className="rounded-[12px]" />
               )}
             </div>
-            <h1 className="text-[21px] font-[500] leading-[140%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[500] leading-[120%] tracking-[1%] ">
               <span className="text-[#171A20]">Exterior finish.</span>{' '}
               <span className="text-[#808080]">Pick your favourite.</span>
             </h1>
@@ -350,7 +350,7 @@ const Configurator = ({
                 <img src={imageMobileInterior} alt="interior image" className="rounded-[12px]" />
               )}
             </div>
-            <h1 className="text-[21px] font-[500] leading-[140%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[500] leading-[120%] tracking-[1%] ">
               <span className="text-[#171A20]">Interior finish.</span>{' '}
               <span className="text-[#808080]">How ready should the interior be?</span>
             </h1>
@@ -380,7 +380,7 @@ const Configurator = ({
                     }}
                   >
                     <div>
-                      <p className="text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[140%]">
+                      <p className="text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[120%]">
                         {interiorFinish.name}
                       </p>
                       <p className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[5px]">
@@ -388,7 +388,7 @@ const Configurator = ({
                       </p>
 
                       <div>
-                        <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[140%] mt-[16px]">
+                        <p className="text-[#171A20] text-[15px] font-[400] tracking-[1.5%] leading-[120%] mt-[16px]">
                           Includes:
                         </p>
                         <ul className="">
@@ -424,7 +424,7 @@ const Configurator = ({
                 <img src={imageMobileExterior} alt="exterior image" className="rounded-[12px]" />
               )}
             </div>
-            <h1 className="text-[21px] font-[500] leading-[140%] tracking-[1%] ">
+            <h1 className="text-[21px] font-[500] leading-[120%] tracking-[1%] ">
               <span className="text-[#171A20]">Optional upgrades.</span>{' '}
               <span className="text-[#808080]">Select the options that work for you.</span>
             </h1>
@@ -512,7 +512,7 @@ const Configurator = ({
           {/* submit details */}
           {isContinue && (
             <div>
-              <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[140%]">
+              <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[120%]">
                 Submit details to confirm price and delivery availability.
               </p>
               <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[8px]">
@@ -629,7 +629,7 @@ const Configurator = ({
                 </div>
               </div>
 
-              <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[140%] font-[400] text-[#171A20]">
+              <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[120%] font-[400] text-[#171A20]">
                 Estimated production lead time: 3-6 weeks from confirmed order.
               </p>
               <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[140%] font-[400] text-[#5C5E62]">
