@@ -118,7 +118,7 @@ const Configurator = ({
   imageMobileInterior,
 }: ConfiguratorProps) => {
   const [isContinue, setIsContinue] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(true);
 
   const interiorSectionRef = useRef<HTMLDivElement>(null);
   const {
@@ -647,7 +647,7 @@ const Configurator = ({
         </div>
       )}
       {isSubmitted && (
-        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[100dvh]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[calc(100vh-56px)] min-[1303px]:h-[100%]">
           <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%] text-center">
             Your proposal request has been submitted.
           </p>
