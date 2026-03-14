@@ -59,6 +59,7 @@ const InputField = ({
 
 type Pricing = {
   price: number;
+  addPrice: number;
   currency: string;
 };
 
@@ -137,16 +138,16 @@ const Configurator = ({
 
     // active size
     const activeSize = data.sizes.find(s => s.isActive);
-    if (activeSize) total += activeSize.pricing.price;
+    if (activeSize) total += activeSize.pricing.addPrice;
 
     // active interior finish
     const activeInterior = data.interiorFinishes.find(i => i.isActive);
-    if (activeInterior) total += activeInterior.pricing.price;
+    if (activeInterior) total += activeInterior.pricing.addPrice;
 
     // due to optional upgrades is like checkbox, we are doing forEach
     data.optionalUpgrades.forEach(upgrade => {
       if (upgrade.isActive) {
-        total += upgrade.pricing.price;
+        total += upgrade.pricing.addPrice;
       }
     });
 
@@ -697,6 +698,7 @@ const page = () => {
         unit: 'sqm',
         pricing: {
           price: 42000,
+          addPrice: 42000,
           currency: 'dollar',
         },
         isActive: true,
@@ -738,6 +740,7 @@ const page = () => {
         ],
         pricing: {
           price: 42000,
+          addPrice: 0,
           currency: 'dollar',
         },
         isActive: true,
@@ -754,6 +757,7 @@ const page = () => {
         ],
         pricing: {
           price: 48000,
+          addPrice: 6000,
           currency: 'dollar',
         },
         isActive: false,
@@ -766,6 +770,7 @@ const page = () => {
         description: 'Improved thermal and acoustic performance',
         pricing: {
           price: 3950,
+          addPrice: 3950,
           currency: 'dollar',
         },
         isActive: true,
@@ -775,6 +780,7 @@ const page = () => {
         description: 'Integrated entry platform for raised floor system',
         pricing: {
           price: 1400,
+          addPrice: 1400,
           currency: 'dollar',
         },
         isActive: false,
@@ -784,6 +790,7 @@ const page = () => {
         description: 'Prepared panel area for tenant signage or branding',
         pricing: {
           price: 2200,
+          addPrice: 2200,
           currency: 'dollar',
         },
         isActive: false,
