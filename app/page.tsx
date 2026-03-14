@@ -481,6 +481,7 @@ const Configurator = ({
               <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
                 A{formatPrice('dollar', totalPrice)}
               </span>
+              {' '}
               <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
                 + GST
               </span>
@@ -671,6 +672,7 @@ const Configurator = ({
             <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[100%]">
               A{formatPrice('dollar', totalPrice)}
             </span>
+            {' '}
             <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[100%]">
               + GST
             </span>
@@ -743,7 +745,7 @@ const page = () => {
           addPrice: 0,
           currency: 'dollar',
         },
-        isActive: true,
+        isActive: false,
       },
       {
         name: 'Standard Interior',
@@ -760,7 +762,7 @@ const page = () => {
           addPrice: 6000,
           currency: 'dollar',
         },
-        isActive: false,
+        isActive: true,
       },
     ],
 
@@ -773,7 +775,7 @@ const page = () => {
           addPrice: 3950,
           currency: 'dollar',
         },
-        isActive: true,
+        isActive: false,
       },
       {
         name: 'Step Deck',
