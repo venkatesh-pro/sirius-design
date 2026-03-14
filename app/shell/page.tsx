@@ -876,10 +876,36 @@ const page = () => {
     handleImageConfigurationMobileInterior();
   }, [configuratorData, isInInteriorSection.current]);
 
+  // after adding this css class, i faced this scroll issue from slider, so i added this `min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100dvh-56px)] h-[calc(100dvh-(14px+21px+21px))] overflow-scroll`
+  const configuratorRef = useRef<HTMLDivElement>(null);
+
+  const handleLeftScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if (configuratorRef.current) {
+      configuratorRef.current.scrollTop += e.deltaY;
+    }
+  };
+
+  useEffect(() => {
+    const preventPageScroll = (e: WheelEvent) => {
+      // Allow normal scrolling if cursor is over the configurator
+      if (configuratorRef.current && configuratorRef.current.contains(e.target as Node)) {
+        return;
+      }
+      e.preventDefault();
+    };
+
+    document.addEventListener('wheel', preventPageScroll, { passive: false });
+    return () => document.removeEventListener('wheel', preventPageScroll);
+  }, []);
   return (
     <>
-      <div className="min-[1303px]:flex justify-between">
-        <div className="max-[1303px]:hidden h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper">
+      <div className="min-[1303px]:flex justify-between max-h-[100dvh] overflow-hidden">
+        <div
+          className="max-[1303px]:hidden h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper"
+          onWheel={handleLeftScroll}
+        >
           <Navbar />
           <div className="h-[calc(100%-(56px+56px))] w-full">
             <Slider sliderImages={sliderImages} />
@@ -890,7 +916,10 @@ const page = () => {
           <Navbar />
         </div>
 
-        <div className="min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100dvh-56px)] h-[calc(100dvh-(14px+21px+21px))] overflow-scroll">
+        <div
+          ref={configuratorRef}
+          className="min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100dvh-56px)] h-[calc(100dvh-(14px+21px+21px))] overflow-scroll"
+        >
           <Configurator
             configuratorData={configuratorData}
             setConfiguratorData={setConfiguratorData}
