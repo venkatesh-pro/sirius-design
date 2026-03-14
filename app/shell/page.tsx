@@ -648,7 +648,7 @@ const Configurator = ({
         </div>
       )}
       {isSubmitted && (
-        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[calc(100vh-56px)] min-[1303px]:h-[100%]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[calc(100dvh-80px)] min-[1303px]:h-[100%]">
           <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[140%] text-center">
             Your proposal request has been submitted.
           </p>
