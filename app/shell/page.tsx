@@ -65,7 +65,7 @@ type Pricing = {
 
 type Size = {
   name: string;
-  value: number;
+  value: string;
   unit: string;
   pricing: Pricing;
   isActive: boolean;
@@ -480,8 +480,7 @@ const Configurator = ({
             <p className="mt-[4px]">
               <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[140%]">
                 A{formatPrice('dollar', totalPrice)}
-              </span>
-              {' '}
+              </span>{' '}
               <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
                 + GST
               </span>
@@ -671,8 +670,7 @@ const Configurator = ({
           <p className="mt-[4px]">
             <span className="text-[#171A20] text-[21px] font-[500] tracking-[1.5%] leading-[140%]">
               A{formatPrice('dollar', totalPrice)}
-            </span>
-            {' '}
+            </span>{' '}
             <span className="text-[#171A20] text-[14px] font-[400] tracking-[1.5%] leading-[140%]">
               + GST
             </span>
@@ -696,7 +694,7 @@ const page = () => {
     sizes: [
       {
         name: '6.0m x 3.2m',
-        value: 19.2,
+        value: '19.20',
         unit: 'sqm',
         pricing: {
           price: 42000,
