@@ -510,156 +510,165 @@ const Configurator = ({
 
           <div className="h-[80px]"></div>
           {/* submit details */}
-          {isContinue && (
-            <div>
-              <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[120%]">
-                Submit details to confirm price and delivery availability.
-              </p>
-              <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[8px]">
-                Receive a formal proposal and delivery timeline for your project.
-              </p>
+          {/* {isContinue && ( */}
+          <div
+            className={`overflow-hidden transition-all duration-1000 ${
+              isContinue ? ' pacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
+            <p className="text-[#171A20] text-[21px] font-[500] tracking-[1%] leading-[120%]">
+              Submit details to confirm price and delivery availability.
+            </p>
+            <p className="text-[#5C5E62] text-[14px] font-[400] tracking-[1.5%] leading-[140%] mt-[8px]">
+              Receive a formal proposal and delivery timeline for your project.
+            </p>
 
-              <div className="mt-[24px] flex flex-col gap-[16px]">
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'company'}
-                    placeholder={'Company'}
-                    register={register}
-                    type={'text'}
-                    errors={errors}
-                  />
-                  {errors.company && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.company.message as string}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'name'}
-                    placeholder={'Name'}
-                    register={register}
-                    type={'text'}
-                    errors={errors}
-                  />
-                  {errors.name && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.name.message as string}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'siteAddress'}
-                    placeholder={'Site Address'}
-                    register={register}
-                    type={'text'}
-                    errors={errors}
-                  />
-                  {errors.siteAddress && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.siteAddress.message as string}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'postalCode'}
-                    placeholder={'Postal Code'}
-                    register={register}
-                    type={'number'}
-                    errors={errors}
-                  />
-                  {errors.postalCode && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.postalCode.message as string}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'projectType'}
-                    placeholder={'Project Type'}
-                    register={register}
-                    type={'text'}
-                    errors={errors}
-                  />
-                  {errors.projectType && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.projectType.message as string}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'emailAddress'}
-                    placeholder={'Email Address'}
-                    register={register}
-                    type={'email'}
-                    errors={errors}
-                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                  />
-                  {errors.emailAddress && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.emailAddress.message as string}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <InputField
-                    isRequired={true}
-                    label={'phoneNumber'}
-                    placeholder={'Phone Number'}
-                    register={register}
-                    type={'text'}
-                    errors={errors}
-                  />
-                  {errors.phoneNumber && (
-                    <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
-                      {errors.phoneNumber.message as string}
-                    </p>
-                  )}
-                </div>
+            <div className="mt-[24px] flex flex-col gap-[16px]">
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'company'}
+                  placeholder={'Company'}
+                  register={register}
+                  type={'text'}
+                  errors={errors}
+                />
+                {errors.company && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.company.message as string}
+                  </p>
+                )}
+              </div>
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'name'}
+                  placeholder={'Name'}
+                  register={register}
+                  type={'text'}
+                  errors={errors}
+                />
+                {errors.name && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.name.message as string}
+                  </p>
+                )}
+              </div>
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'siteAddress'}
+                  placeholder={'Site Address'}
+                  register={register}
+                  type={'text'}
+                  errors={errors}
+                />
+                {errors.siteAddress && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.siteAddress.message as string}
+                  </p>
+                )}
+              </div>
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'postalCode'}
+                  placeholder={'Postal Code'}
+                  register={register}
+                  type={'number'}
+                  errors={errors}
+                />
+                {errors.postalCode && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.postalCode.message as string}
+                  </p>
+                )}
               </div>
 
-              <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[120%] font-[400] text-[#171A20]">
-                Estimated production lead time: 3-6 weeks from confirmed order.
-              </p>
-              <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[140%] font-[400] text-[#5C5E62]">
-                Pricing shown is indicative based on selected configuration. Delivery, installation
-                and permits may vary by site and location.
-              </p>
-              <button
-                onClick={handleSubmit(onSubmit)}
-                className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[140%]"
-              >
-                Request Proposal
-              </button>
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'projectType'}
+                  placeholder={'Project Type'}
+                  register={register}
+                  type={'text'}
+                  errors={errors}
+                />
+                {errors.projectType && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.projectType.message as string}
+                  </p>
+                )}
+              </div>
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'emailAddress'}
+                  placeholder={'Email Address'}
+                  register={register}
+                  type={'email'}
+                  errors={errors}
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                />
+                {errors.emailAddress && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.emailAddress.message as string}
+                  </p>
+                )}
+              </div>
+              <div>
+                <InputField
+                  isRequired={true}
+                  label={'phoneNumber'}
+                  placeholder={'Phone Number'}
+                  register={register}
+                  type={'text'}
+                  errors={errors}
+                />
+                {errors.phoneNumber && (
+                  <p className="text-[14px] mt-[10px] tracking-[1.5%] leading-[140%] font-[400] text-[#B74134]">
+                    {errors.phoneNumber.message as string}
+                  </p>
+                )}
+              </div>
             </div>
-          )}
+
+            <p className="text-[14px] mt-[24px] tracking-[1.5%] leading-[120%] font-[400] text-[#171A20]">
+              Estimated production lead time: 3-6 weeks from confirmed order.
+            </p>
+            <p className="text-[14px] mt-[16px] tracking-[1.5%] leading-[140%] font-[400] text-[#5C5E62]">
+              Pricing shown is indicative based on selected configuration. Delivery, installation
+              and permits may vary by site and location.
+            </p>
+            <button
+              onClick={handleSubmit(onSubmit)}
+              className="cursor-pointer mt-[32px] w-full h-[56px] bg-[#171A20] rounded-[100px] text-white text-[17px] font-[400] tracking-[1%] leading-[140%]"
+            >
+              Request Proposal
+            </button>
+          </div>
+          {/* )} */}
+
           {isContinue === true && <div className="h-[80px]"></div>}
         </div>
       )}
-      {isSubmitted && (
-        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[calc(100dvh-80px)] min-[1303px]:h-[100%]">
-          <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[140%] text-center">
-            Your proposal request has been submitted.
-          </p>
-          <button
-            className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[140%]"
-            onClick={() => (window.location.href = '')}
-          >
-            Explore Sirius Shell
-          </button>
-        </div>
-      )}
+      {/* {isSubmitted && ( */}
+      <div
+        className={`overflow-hidden transition-all duration-[1.2s] mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[calc(100dvh-80px)] min-[1303px]:h-[100%] ${
+          isSubmitted ? ' opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[140%] text-center">
+          Your proposal request has been submitted.
+        </p>
+        <button
+          className="cursor-pointer mt-[32px] w-full h-[56px] border-[#171A20] border-[1px] rounded-[100px] text-[#171A20] text-[17px] font-[400] tracking-[1%] leading-[140%]"
+          onClick={() => (window.location.href = '')}
+        >
+          Explore Sirius Shell
+        </button>
+      </div>
+      {/* )} */}
 
       {/* stick pricing div */}
       {isSubmitted !== true && (
