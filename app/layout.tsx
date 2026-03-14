@@ -6,17 +6,17 @@ import localFont from 'next/font/local';
 const universalSans = localFont({
   src: [
     {
-      path: '../public/fonts/Universal-Sans-Display-300.ttf',
+      path: '/fonts/Universal-Sans-Display-300.ttf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: '../public/fonts/Universal-Sans-Display-350.ttf',
+      path: '/fonts/Universal-Sans-Display-350.ttf',
       weight: '350',
       style: 'normal',
     },
     {
-      path: '../public/fonts/Universal-Sans-Display-450.ttf',
+      path: '/fonts/Universal-Sans-Display-450.ttf',
       weight: '450',
       style: 'normal',
     },
