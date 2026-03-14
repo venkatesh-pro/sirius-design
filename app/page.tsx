@@ -104,6 +104,8 @@ type ConfiguratorProps = {
   setSliderImages: React.Dispatch<React.SetStateAction<string[]>>;
   handleImageConfiguration: () => void;
   isInInteriorSection: React.MutableRefObject<boolean>;
+  imageMobileExterior: string;
+  imageMobileInterior: string;
 };
 
 const Configurator = ({
@@ -112,6 +114,8 @@ const Configurator = ({
   setSliderImages,
   handleImageConfiguration,
   isInInteriorSection,
+  imageMobileExterior,
+  imageMobileInterior,
 }: ConfiguratorProps) => {
   const [isContinue, setIsContinue] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -278,6 +282,12 @@ const Configurator = ({
 
           {/* exterior finish */}
           <div className="mt-[80px]">
+            {/* this image is for responsive view */}
+            <div className="min-[1303px]:hidden max-[1303px]:mb-[28px]">
+              {imageMobileExterior && (
+                <img src={imageMobileExterior} alt="exterior image" className="rounded-[12px]" />
+              )}
+            </div>
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Exterior finish.</span>{' '}
               <span className="text-[#808080]">Pick your favourite.</span>
@@ -333,6 +343,12 @@ const Configurator = ({
 
           {/* interior finish */}
           <div className="mt-[80px]" ref={interiorSectionRef}>
+            {/* this image is for responsive view */}
+            <div className="min-[1303px]:hidden max-[1303px]:mb-[28px]">
+              {imageMobileInterior && (
+                <img src={imageMobileInterior} alt="interior image" className="rounded-[12px]" />
+              )}
+            </div>
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Interior finish.</span>{' '}
               <span className="text-[#808080]">How ready should the interior be?</span>
@@ -401,6 +417,12 @@ const Configurator = ({
 
           {/* optional upgrades */}
           <div className="mt-[80px]">
+            {/* this image is for responsive view */}
+            <div className="min-[1303px]:hidden max-[1303px]:mb-[28px]">
+              {imageMobileExterior && (
+                <img src={imageMobileExterior} alt="exterior image" className="rounded-[12px]" />
+              )}
+            </div>
             <h1 className="text-[21px] font-[400] leading-[100%] tracking-[1%] ">
               <span className="text-[#171A20]">Optional upgrades.</span>{' '}
               <span className="text-[#808080]">Select the options that work for you.</span>
@@ -625,7 +647,7 @@ const Configurator = ({
         </div>
       )}
       {isSubmitted && (
-        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[100%]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] flex items-center justify-center flex-col h-[100dvh]">
           <p className=" text-[#171A20] text-[17px] font-[500] tracking-[1%] leading-[100%] text-center">
             Your proposal request has been submitted.
           </p>
@@ -664,6 +686,8 @@ const Configurator = ({
 
 const page = () => {
   const [sliderImages, setSliderImages] = useState<string[]>([]);
+  const [imageMobileExterior, setImageMobileExterior] = useState('');
+  const [imageMobileInterior, setImageMobileInterior] = useState('');
 
   const [configuratorData, setConfiguratorData] = useState<ConfiguratorData>({
     sizes: [
@@ -795,8 +819,45 @@ const page = () => {
       setSliderImages([image]);
     }
   };
+
+  const handleImageConfigurationMobileExterior = () => {
+    const activeColor = configuratorData.exteriorFinishes.find(c => c.isActive);
+    const deck = configuratorData.optionalUpgrades.find(u => u.name === 'Step Deck')?.isActive;
+    const brand = configuratorData.optionalUpgrades.find(
+      u => u.name === 'Brand Facade Panel'
+    )?.isActive;
+
+    const interior = configuratorData.interiorFinishes.find(i => i.isActive);
+
+    const colorName = activeColor?.name.toLocaleLowerCase();
+
+    console.log(isInInteriorSection.current);
+
+    const image = `/configuratorImages/${colorName}/${
+      interior?.name === 'Standard Interior' ? 'standard-' : ''
+    }${colorName}-${deck ? 'deck' : 'no-deck'}-${brand ? 'brand' : 'no-brand'}.jpg`;
+
+    console.log({ image });
+
+    setImageMobileExterior(image);
+  };
+
+  const handleImageConfigurationMobileInterior = () => {
+    const interior = configuratorData.interiorFinishes.find(i => i.isActive);
+
+    const image = `/configuratorImages/interior/${
+      interior?.name === 'Standard Interior' ? 'I2.jpg' : 'I1.jpg'
+    }`;
+
+    setImageMobileInterior(image);
+  };
+
   useEffect(() => {
     handleImageConfiguration();
+
+    // TODO: only at the certain break point to solve the resource memory:
+    handleImageConfigurationMobileExterior();
+    handleImageConfigurationMobileInterior();
   }, [configuratorData, isInInteriorSection.current]);
 
   return (
@@ -815,6 +876,9 @@ const page = () => {
             setSliderImages={setSliderImages}
             handleImageConfiguration={handleImageConfiguration}
             isInInteriorSection={isInInteriorSection}
+            // responsive
+            imageMobileExterior={imageMobileExterior}
+            imageMobileInterior={imageMobileInterior}
           />
         </div>
       </div>
