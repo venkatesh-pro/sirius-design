@@ -663,7 +663,7 @@ const Configurator = ({
 
       {/* stick pricing div */}
       {isSubmitted !== true && (
-        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 backdrop-blur-[80px]">
+        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-[0] backdrop-blur-[80px]">
           <p className="text-[15px] tracking-[1.5%] leading-[140%] font-[400] text-[#171A20]">
             Estimated Price
           </p>
@@ -881,7 +881,7 @@ const page = () => {
           <Navbar />
         </div>
 
-        <div className="min-[1303px]:w-[30vw] ">
+        <div className="min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100vh-56px)] h-[calc(100vh-(14px+21px+21px+24px))] overflow-scroll">
           <Configurator
             configuratorData={configuratorData}
             setConfiguratorData={setConfiguratorData}
