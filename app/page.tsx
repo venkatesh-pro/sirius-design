@@ -118,7 +118,7 @@ const Configurator = ({
   imageMobileInterior,
 }: ConfiguratorProps) => {
   const [isContinue, setIsContinue] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const interiorSectionRef = useRef<HTMLDivElement>(null);
   const {
