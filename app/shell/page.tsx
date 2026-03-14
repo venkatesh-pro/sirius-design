@@ -304,12 +304,12 @@ const Configurator = ({
                 Included
               </p>
             </div>
-            <div className="mt-[16px] flex gap-[17px] ">
+            <div className="mt-[16px] flex gap-[5px] ">
               {configuratorData.exteriorFinishes.map((exteriorFinish, exteriorFinishIndex) => {
                 return (
                   <div
                     key={exteriorFinishIndex}
-                    className={` flex items-center justify-center p-[5px] border-2 border-transparent cursor-pointer ${
+                    className={` flex items-center w-[47px] h-[47px] justify-center p-[5px] border-2 border-transparent cursor-pointer ${
                       exteriorFinish.isActive ? 'border-2 rounded-full border-[#171A20]' : ''
                     }`}
                     style={{
