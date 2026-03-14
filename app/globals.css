@@ -25,7 +25,7 @@
 @layer utilities {
   .wrapper {
     /* @apply px-[2rem] md:px-[5rem] 2*16=> 32px , 5*16=> 80px; */
-    @apply pl-12 md:pl-20;
+    @apply pl-[24px] min-[1303px]:pl-[48px];
   }
 }
 

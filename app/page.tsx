@@ -214,7 +214,7 @@ const Configurator = ({
   return (
     <>
       {isSubmitted !== true && (
-        <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[140px]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[80px] min-[1303px]:mt-[140px]">
           {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
           <div>
             <h1 className="text-[40px] font-[400] leading-[100%] tracking-[0%] text-[#171A20]">
@@ -869,6 +869,11 @@ const page = () => {
             <Slider sliderImages={sliderImages} />
           </div>
         </div>
+        {/* for mobile */}
+        <div className="max-[1303px]:block hidden wrapper">
+          <Navbar />
+        </div>
+
         <div className="min-[1303px]:w-[30vw] ">
           <Configurator
             configuratorData={configuratorData}
