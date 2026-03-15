@@ -129,15 +129,32 @@ const Configurator = ({
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: unknown) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
+
+    const size = configuratorData.sizes.find(s => s.isActive);
+    const exterior = configuratorData.exteriorFinishes.find(e => e.isActive);
+    const interior = configuratorData.interiorFinishes.find(i => i.isActive);
+    const optionalUpgrades = configuratorData.optionalUpgrades.filter(o => o.isActive);
+
+    const activeConfigurator = {
+      size: size?.name,
+      exteriorFinish: exterior?.name,
+      interiorFinish: interior?.name,
+      optionalUpgrades: optionalUpgrades.map(o => o.name),
+      totalPrice: calculateTotalPrice(configuratorData),
+    };
+
+    const finalData = { ...data, configurator: activeConfigurator };
+
+    console.log(finalData);
 
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(finalData),
     });
     if (!res.ok) {
       toast.error('Sorry, Something went wrong');
