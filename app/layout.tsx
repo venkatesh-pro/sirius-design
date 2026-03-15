@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
+import { Toaster } from 'react-hot-toast';
 
 const universalSans = localFont({
   src: [
@@ -35,7 +36,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${universalSans.variable} font-universal antialiased `}>{children}</body>
+      <body className={`${universalSans.variable} font-universal antialiased `}>
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }

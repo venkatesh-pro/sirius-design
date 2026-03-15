@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar';
 import Slider from '@/components/Slider/Slider';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { FieldErrors, FieldValues, useForm, UseFormRegister } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 // const Slider = ({ sliderImages, setSliderImages }) => {
 //   return <img src={'/banner1.jpg'} className="h-full w-full"></img>;
@@ -128,9 +129,25 @@ const Configurator = ({
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: unknown) => {
-    setIsSubmitted(true);
+  const onSubmit = async (data: unknown) => {
     console.log(data);
+
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      toast.error('Sorry, Something went wrong');
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const result = await res.json();
+
+    console.log({ result });
+
+    setIsSubmitted(true);
   };
 
   const calculateTotalPrice = (data: ConfiguratorData) => {

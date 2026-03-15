@@ -17,11 +17,15 @@ export async function POST(req: Request) {
   await transporter.sendMail({
     from: 'contact@siriusbuildings.com',
     to: 'programervenkatesh@gmail.com',
-    subject: 'New Form Submission',
+    subject: 'Sirius Contact Form',
     text: `
-Name: ${data.name}
-Email: ${data.email}
-Message: ${data.message}
+      Company : ${data.company}
+      Name : ${data.name}
+      Site Address : ${data.siteAddress}
+      Postal Code : ${data.postalCode}
+      Project Type : ${data.projectType}
+      Email : ${data.emailAddress}
+      Phone Number : ${data.phoneNumber}
     `,
   });
 
