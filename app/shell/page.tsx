@@ -706,7 +706,7 @@ const Configurator = ({
 
       {/* stick pricing div */}
       {isSubmitted !== true && (
-        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-[0] backdrop-blur-[80px]">
+        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-[56px] backdrop-blur-[80px]">
           <p className="text-[15px] tracking-[1.5%] leading-[140%] font-[400] text-[#171A20]">
             Estimated Price
           </p>
@@ -921,24 +921,24 @@ const page = () => {
     }
   };
 
-  useEffect(() => {
-    const preventPageScroll = (e: WheelEvent) => {
-      // Allow normal scrolling if cursor is over the configurator
-      if (configuratorRef.current && configuratorRef.current.contains(e.target as Node)) {
-        return;
-      }
-      e.preventDefault();
-    };
+  // useEffect(() => {
+  //   const preventPageScroll = (e: WheelEvent) => {
+  //     // Allow normal scrolling if cursor is over the configurator
+  //     if (configuratorRef.current && configuratorRef.current.contains(e.target as Node)) {
+  //       return;
+  //     }
+  //     e.preventDefault();
+  //   };
 
-    document.addEventListener('wheel', preventPageScroll, { passive: false });
-    return () => document.removeEventListener('wheel', preventPageScroll);
-  }, []);
+  //   document.addEventListener('wheel', preventPageScroll, { passive: false });
+  //   return () => document.removeEventListener('wheel', preventPageScroll);
+  // }, []);
   return (
     <>
-      <div className="min-[1303px]:flex justify-between max-h-[100dvh] overflow-hidden">
+      <div className="min-[1303px]:flex justify-between">
         <div
           className="max-[1303px]:hidden h-[100dvh] sticky top-0 w-[70vw]  desktop:min-w-[1248px] wrapper"
-          onWheel={handleLeftScroll}
+          // onWheel={handleLeftScroll}
         >
           <Navbar />
           <div className="h-[calc(100%-(56px+56px))] w-full">
@@ -950,10 +950,7 @@ const page = () => {
           <Navbar />
         </div>
 
-        <div
-          ref={configuratorRef}
-          className="min-[1303px]:w-[30vw] min-[1303px]:h-[calc(100dvh-56px)] h-[calc(100dvh-(14px+21px+21px))] overflow-scroll"
-        >
+        <div className="min-[1303px]:w-[30vw]">
           <Configurator
             configuratorData={configuratorData}
             setConfiguratorData={setConfiguratorData}
@@ -966,6 +963,7 @@ const page = () => {
           />
         </div>
       </div>
+      <div className="h-[56px]  sticky bottom-0 right-0 w-full -mt-[56px] bg-white"></div>
     </>
   );
 };
