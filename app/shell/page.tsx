@@ -149,20 +149,20 @@ const Configurator = ({
 
     console.log(finalData);
 
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(finalData),
-    });
-    if (!res.ok) {
-      toast.error('Sorry, Something went wrong');
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    const result = await res.json();
+    // const res = await fetch('/api/contact', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(finalData),
+    // });
+    // if (!res.ok) {
+    //   toast.error('Sorry, Something went wrong');
+    //   throw new Error(`HTTP error! status: ${res.status}`);
+    // }
+    // const result = await res.json();
 
-    console.log({ result });
+    // console.log({ result });
 
     setIsSubmitted(true);
   };
