@@ -249,7 +249,7 @@ const Configurator = ({
   return (
     <>
       {isSubmitted !== true && (
-        <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[80px] min-[1303px]:mt-[140px]">
+        <div className="mx-[24px] min-[1303px]:mx-[48px] mt-[calc(80px+14px+14px)] min-[1303px]:mt-[140px]">
           {/* <pre>{JSON.stringify(configuratorData, null, 4)}</pre> */}
           <div>
             <h1 className="text-[40px] font-[500] leading-[120%] tracking-[0%] text-[#171A20]">
@@ -541,8 +541,15 @@ const Configurator = ({
               </button>
             )}
           </div>
+          {/* desktop */}
+          <div
+            className={`hidden min-[1303px]:block ${
+              isContinue ? 'h-[calc(80px)]' : 'h-[calc(80px+56px)]'
+            }`}
+          ></div>
+          {/* mobile */}
+          <div className={`block min-[1303px]:hidden h-[calc(80px)]`}></div>
 
-          <div className="h-[80px]"></div>
           {/* submit details */}
           {/* {isContinue && ( */}
           <div
@@ -683,7 +690,9 @@ const Configurator = ({
           </div>
           {/* )} */}
 
-          {isContinue === true && <div className="h-[80px]"></div>}
+          {isContinue === true && <div className="h-[80px] min-[1303px]:h-[calc(80px+56px)]"></div>}
+
+          
         </div>
       )}
       {/* {isSubmitted && ( */}
@@ -706,7 +715,7 @@ const Configurator = ({
 
       {/* stick pricing div */}
       {isSubmitted !== true && (
-        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-[56px] backdrop-blur-[80px]">
+        <div className="bg-[#D4D4D44D] py-[16px] px-[24px] rounded-[12px] mx-[24px] sticky bottom-0 min-[1303px]:bottom-[56px] backdrop-blur-[80px]">
           <p className="text-[15px] tracking-[1.5%] leading-[140%] font-[400] text-[#171A20]">
             Estimated Price
           </p>
@@ -963,7 +972,7 @@ const page = () => {
           />
         </div>
       </div>
-      <div className="h-[56px]  sticky bottom-0 right-0 w-full -mt-[56px] bg-white"></div>
+      <div className="hidden min-[1303px]:block h-[56px]  sticky bottom-0 right-0 w-full -mt-[56px] bg-white"></div>
     </>
   );
 };
